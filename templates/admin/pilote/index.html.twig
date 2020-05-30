@@ -1,0 +1,60 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Les Pilotes{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5">Gestion des Pilotes</h1>
+        <input class="form-control" id="myInput" type="text" placeholder="Rechercher..">
+        <br>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Nationalité</th>
+                    <th>Team</th>
+                    <th>Date de naissance</th>
+                    <th>Actif</th>
+            
+
+                    
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+            
+                {% for pilote in pagination.data %}
+                    <tr>
+                        <td>{{pilote.id}}</td>
+                        <td>{{pilote.prenom}}</td>
+                        <td>{{pilote.nom}}</td>
+                        <td>{{pilote.nationalite}}</td>
+                        <td>{{pilote.team.nom}}</td>
+                        
+                        <td>{{pilote.datenaissance | date("m/d/Y")}}</td>
+                        <td>{{pilote.actif}}</td>
+                        <td class="text-center">
+                            <a href="{{ path('admin_pilote_edit', {'id':pilote.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_pilote_delete', {'id':pilote.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination.display() }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+ $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+</script>
+{% endblock %}

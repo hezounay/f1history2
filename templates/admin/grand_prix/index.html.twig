@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Les Grands-Prix{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5">Gestion des Grands Prix</h1>
+         <input class="form-control" id="myInput" type="text" placeholder="Rechercher..">
+         <br>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Pays</th>
+                    <th>Date</th>
+                    <th>Carte</th>
+                <!--    <th>Chronos</th> !-->
+
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% for grandprix in pagination.data %}
+                    <tr>
+                        <td>{{grandprix.id}}</td>
+                        <td><a href="{{ path('admin_grandprix_show', {'slug':grandprix.slug}) }}" style="text-decoration:none;">{{grandprix.title}}</a></td>
+                        <td>{{grandprix.date}}</td>
+                        <td>{{grandprix.map}}</td>       
+                
+                        <td class="text-center">
+                            <a href="{{ path('admin_grandprix_edit', {'id':grandprix.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_grandprix_delete', {'id':grandprix.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination.display() }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+ $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+</script>
+{% endblock %}
