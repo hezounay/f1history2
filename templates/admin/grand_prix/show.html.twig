@@ -18,14 +18,13 @@
         <th>Position</th>
         <th>Prénom</th>
         <th>Nom</th>
-     
         <th>Nationalité</th>
         <th>Temps</th>
       </tr>
     </thead>
     <tbody>
         
-     {% for stats in grandprix.stats|sortbyfield('chrono', 'asc') %}
+     {% for stats in grandprix.stats %}
       <tr>
   
         <td>{{loop.index}}</td>

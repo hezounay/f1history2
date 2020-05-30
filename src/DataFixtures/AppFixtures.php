@@ -122,7 +122,7 @@ class AppFixtures extends Fixture
             $stats = new Stats();
 
             
-            $chrono='1:25:365';
+            $chrono="1:34'10.859";
             
             
            
