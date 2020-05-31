@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Stats;
 use App\Entity\GrandPrix;
 use App\Form\GrandPrixType;
+use App\Service\OrderService;
 use App\Service\PaginationService;
 use App\Repository\GrandPrixRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -146,14 +147,15 @@ class AdminGrandPrixController extends AbstractController
      * @param Stats $stats
      * @return Response
      */
-    public function show($slug, GrandPrix $grandprix ){
+    public function show($slug, GrandPrix $grandprix,OrderService $orderService){
 
-        //$ad = $repo->findOneBySlug($slug);
-      
+        
+        $chrono = $orderService->getChronoOrderByAsc();
         
 
         return $this->render('admin/grand_prix/show.html.twig',[
           'grandprix' => $grandprix,
+          'chrono' => $chrono
         ]);
 
     }
