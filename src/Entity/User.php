@@ -50,7 +50,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas correctement confirmé votre mot de passe")
      */
-    private $passwordConfirm;
+    private $passwordConfirm;  
 
     /**
      * @ORM\Column(type="string", length=255)

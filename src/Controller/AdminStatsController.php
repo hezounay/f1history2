@@ -56,7 +56,7 @@ class AdminStatsController extends AbstractController
 
             $this->addFlash(
                 'success',
-                "Les Statistiques de <strong>{$pilote->getNom()}</strong> au <strong>{$grandprix->getTitle()}}</strong> en {$stats->getAnnee()} ont bien été modifiées"
+                "Les Statistiques de <strong></strong> au <strong></strong> en ont bien été modifiées"
             );
         }
 
@@ -74,40 +74,54 @@ class AdminStatsController extends AbstractController
      * Permet de créer des Statistiques
      * @Route("/admin/stats/new", name="admin_stats_create")
      * 
-     * @param Stats $stats
+     * 
      * @param Pilote $pilote
      * @param GrandPrix $grandprix
      * @param Request $request
      * @return Response
      */
-    public function create(Stats $stats, Pilote $pilote, GrandPrix $grandprix, Request $request, EntityManagerInterface $manager){
+    public function create(Request $request, EntityManagerInterface $manager){
         $stats = new Stats();
        
-        $form = $this->createForm(StatsType::class, $stats);
+        $form = $this->createForm(StatsType::class,$stats);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
-           
+        $chrono=$stats->getChrono();
+        $chronohour=$chrono/3600000;
+        $chronominutes=$chrono/60000;
+        $chronoseconds=$chrono/1000;
+        $chronomilliseconds=$chrono;
+        $chronoTot= $chronohour.':'.$chronominutes."'".$chronoseconds.".".$chronomilliseconds;
+         //  $chrono=$stats->getChrono();
+         //  $chronohour=str_split(":",$chrono)[0];
+        //   $chronominutes=str_split("'",str_split(":",$chrono)[1])[0];
+        //   $chronoseconds=str_split(".",str_split("'",str_split(":",$chrono)[1])[1])[0];
+        //   $chronomilliseconds=str_split(".",str_split("'",str_split(":",$chrono)[1])[1])[1];
+        //   dd($chronohour.'-'.$chronominutes.'-'.$chronoseconds.'-'. $chronomilliseconds);
 
-     
+        //    $chronotot= $chronohour.':'.$chronominutes."'".$chronoseconds.".".$chronomilliseconds;
 
             $manager->persist($stats);
             $manager->flush();
 
             $this->addFlash(
                 'success',
-                "Les Statistiques de <strong>{$pilote->getNom()}</strong> au <strong>{$grandprix->getTitle()}}</strong> en {$stats->getAnnee()} ont bien été enregistrées ! "
+                "Les Statistiques de <strong>X</strong> au <strong>X</strong> en X ont bien été enregistrées ! "
             );
 
             return $this->redirectToRoute('admin_stats_index',[
-                'slug' => $stats->getSlug()
+                'slug' => $stats->getSlug(),
+                'chrono'=> $chronoTot
             ]);
         }
 
         return $this->render('admin/stats/new.html.twig', [
-           'myForm' => $form->createView()
+           'myForm' => $form->createView(),
+           
+
         ]);
 
     }
@@ -128,7 +142,7 @@ class AdminStatsController extends AbstractController
 
             $this->addFlash(
                 'success',
-                "Les Statistiques de <strong>{$pilote->getNom()}</strong> au <strong>{$grandprix->getTitle()}}</strong> en {$stats->getAnnee()} ont bien été supprimées"
+                "Les Statistiques de <strong>X</strong> au <strong>X</strong> en X ont bien été supprimées"
             );
         }
 

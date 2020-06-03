@@ -21,17 +21,11 @@ class Stats
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $team;
+
 
  
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $annee;
+  
 
     /**
      * @ORM\ManyToOne(targetEntity=Pilote::class, inversedBy="stats")
@@ -46,7 +40,7 @@ class Stats
     private $grandPrix;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @ORM\OrderBy({"order" = "ASC", "id" = "ASC"})
      */
     private $chrono;
@@ -55,6 +49,18 @@ class Stats
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="stats")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $team;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=GrandPrix::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $date;
 
 
 
@@ -80,17 +86,7 @@ class Stats
         return $this->id;
     }
 
-    public function getTeam(): ?string
-    {
-        return $this->team;
-    }
-
-    public function setTeam(string $team): self
-    {
-        $this->team = $team;
-
-        return $this;
-    }
+   
 
     public function getChrono()
     {
@@ -104,17 +100,7 @@ class Stats
         return $this;
     }
 
-    public function getAnnee(): ?string
-    {
-        return $this->annee;
-    }
-
-    public function setAnnee(string $annee): self
-    {
-        $this->annee = $annee;
-
-        return $this;
-    }
+   
 
     public function getPilote(): ?Pilote
     {
@@ -148,6 +134,30 @@ class Stats
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    public function getDate(): ?GrandPrix
+    {
+        return $this->date;
+    }
+
+    public function setDate(?GrandPrix $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

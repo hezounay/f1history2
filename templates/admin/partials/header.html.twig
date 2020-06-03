@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="z-index:100; opacity:100%;">
             <a class="navbar-brand" href="{{ path('admin_dashboard_index') }}">F1 History</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -11,17 +12,17 @@
                         <a class="nav-link" href="{{ path('admin_dashboard_index') }}"><i class="fas fa-chart-line"></i>&nbsp Dashboard</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{{path('admin_stats_index')}}"><i class="fab fa-whmcs"></i></i></i>&nbsp Statistiques</a>
+                        <a class="nav-link" href="{{path('admin_stats_index')}}"><i class="fab fa-whmcs"></i>&nbsp Statistiques</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('admin_grandprix_index')}}"><i class="fas fa-flag-checkered"></i></i>&nbsp Grands Prix</a>
+                        <a class="nav-link" href="{{path('admin_grandprix_index')}}"><i class="fas fa-flag-checkered"></i>&nbsp Grands Prix</a>
                     </li>
 
                      <li class="nav-item">
-                        <a class="nav-link" href="{{path('admin_pilote_index')}}"><i class="fas fa-users"></i></i>&nbsp Pilotes</a>
+                        <a class="nav-link" href="{{path('admin_pilote_index')}}"><i class="fas fa-users"></i>&nbsp Pilotes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('admin_team_index')}}"><i class="fas fa-car"></i></i></i>&nbsp Team</a>
+                        <a class="nav-link" href="{{path('admin_team_index')}}"><i class="fas fa-car"></i>&nbsp Teams</a>
                     </li>
                    
                     
@@ -33,17 +34,16 @@
                     <li class="nav-item">
                         <a href="{{ path('homepage') }}" target="_blank" class="nav-link"><i class="fas fa-eye"></i> &nbsp Voir le site</a>
                     </li>
-                  {% if app.user %}
+                
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
-                          
                             {{ app.user.userName }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
                             <a href="{{ path('account_logout')}}" class="dropdown-item">Déconnexion</a>
                         </div>
                     </li>
-                  {% endif %}
+               
                 </ul>
             </div>
         </nav>

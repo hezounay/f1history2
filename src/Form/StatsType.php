@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class StatsType extends AbstractType
 {
@@ -20,14 +21,15 @@ class StatsType extends AbstractType
         ->add('team', EntityType::class, [
             'label' => 'Ecurie',
             'attr' => [
-                'placeholder'=>"Ecurie du Pilote"
+                'placeholder'=>"Ecurie du Pilote",
+                
             ],
             'class' => Team::class,
             'choice_label' => function($team){
                 return $team->getNom();
             }
         ])
-        ->add('annee', EntityType::class, [
+        ->add('date', EntityType::class, [
             'label' => 'Année',
             'attr' => [
                 'placeholder'=>"Année du Grand-Prix"
@@ -37,8 +39,9 @@ class StatsType extends AbstractType
                 return $grandprix->getDate();
             }
         ])
-        ->add('chrono', TextType::class, [
+        ->add('chrono', IntegerType::class, [
             'label' => 'Chrono',
+           
             'attr' => [
                 'placeholder'=>"Chrono effectué"
             ]

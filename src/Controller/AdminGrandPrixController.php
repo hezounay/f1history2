@@ -8,6 +8,7 @@ use App\Form\GrandPrixType;
 use App\Service\OrderService;
 use App\Service\PaginationService;
 use App\Repository\GrandPrixRepository;
+use App\Repository\StatsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -147,15 +148,16 @@ class AdminGrandPrixController extends AbstractController
      * @param Stats $stats
      * @return Response
      */
-    public function show($slug, GrandPrix $grandprix,OrderService $orderService){
+    public function show($slug, GrandPrix $grandprix,StatsRepository $statsRepository){
 
+        $statsRepository->orderByChrono();
         
-        $chrono = $orderService->getChronoOrderByAsc();
         
 
         return $this->render('admin/grand_prix/show.html.twig',[
           'grandprix' => $grandprix,
-          'chrono' => $chrono
+          'chrono' => $statsRepository->orderByChrono()
+        
         ]);
 
     }

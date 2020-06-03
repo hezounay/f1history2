@@ -123,7 +123,7 @@ class AccountController extends AbstractController
                     'Votre mot de passe a bien été modifié'
                 );
 
-                return $this->redirectToRoute('account_index');
+                return $this->redirectToRoute('homepage');
             }
         }
 
@@ -133,5 +133,37 @@ class AccountController extends AbstractController
 
 
     }
+     /**
+     * Permet d'afficher et de traiter le formulaire de modification de profil
+     * @Route("/account/profile", name="account_profile")
+     * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function profile(Request $request, EntityManagerInterface $manager){
+        $user = $this->getUser(); // récup l'utilisateur connecté
+
+        $form = $this->createForm(AccountType::class,$user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Les données ont été enregistrées avec succès'
+            );
+        }
+
+        return $this->render('account/profile.html.twig',[
+            'myForm' => $form->createView()
+        ]);
+
+
+    }
+
 
 }

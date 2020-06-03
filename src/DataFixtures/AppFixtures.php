@@ -44,12 +44,12 @@ class AppFixtures extends Fixture
             $gp = new GrandPrix();
 
             $title = $faker->country();
-            $date =$faker->numberBetween(2014,2019);
+            $dategp =mt_rand(2014,2019);
             $map = $faker->imageUrl(350,350);
             $description ="<p>".join("</p><p>",$faker->paragraphs(3))."</p>";
 
             $gp->setTitle($title." Grand-Prix")
-               ->setDate($date)
+               ->setDate($dategp)
                ->setMap($map)
                ->setDescription($description);
 
@@ -121,16 +121,15 @@ class AppFixtures extends Fixture
 
             $stats = new Stats();
 
-            
-            $chrono="1:34'10.859";
+            $chrono=2694124;
             
             
            
             
 
-            $stats->setTeam($nomteam)
+            $stats->setTeam($team)
                 ->setChrono($chrono)
-               ->SetAnnee($date)
+               ->setDate($this->gp)
                ->setPilote($pilote)
                ->setGrandPrix($this->gp);
                

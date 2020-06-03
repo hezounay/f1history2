@@ -28,12 +28,12 @@
                          
                         <td>{{stats.pilote.prenom}} {{stats.pilote.nom}}</td>
                         
-                        <td>{{stats.team}}</td>
+                        <td>{{stats.team.nom}}</td>
                         
                         <td>{{stats.grandprix.title}}</td>
                          
-                        <td>{{stats.annee}}</td>
-                        <td>{{stats.chrono}}</td>
+                        <td>{{stats.grandprix.date}}</td>
+                        <td>{{stats.chrono| date("H:i's.z")}}</td>
                         
                        
                         <td class="text-center">

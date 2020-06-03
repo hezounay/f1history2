@@ -45,6 +45,11 @@ class Team
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Stats::class, mappedBy="team", orphanRemoval=true)
+     */
+    private $stats;
     
      /**
      * Permet d'intialiser le slug
@@ -65,6 +70,7 @@ class Team
     public function __construct()
     {
         $this->pilotes = new ArrayCollection();
+        $this->stats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +153,37 @@ class Team
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stats[]
+     */
+    public function getStats(): Collection
+    {
+        return $this->stats;
+    }
+
+    public function addStat(Stats $stat): self
+    {
+        if (!$this->stats->contains($stat)) {
+            $this->stats[] = $stat;
+            $stat->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStat(Stats $stat): self
+    {
+        if ($this->stats->contains($stat)) {
+            $this->stats->removeElement($stat);
+            // set the owning side to null (unless already changed)
+            if ($stat->getTeam() === $this) {
+                $stat->setTeam(null);
+            }
+        }
 
         return $this;
     }

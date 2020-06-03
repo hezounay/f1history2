@@ -13,7 +13,7 @@ class OrderService{
     }
 
     public function getChronoOrderByAsc(){
-        return $this->manager->createQuery('SELECT chrono  FROM App\Entity\Stats ORDER BY(chrono) ASC')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT chrono  FROM App\Entity\Stats')->getSingleScalarResult();
     }
 
 }
