@@ -22,6 +22,7 @@
   }
   
   body {
+    overflow-X:hidden;
     color: black;
     background-color: white;
     margin: 0;
@@ -29,7 +30,7 @@
   }
   
   body::-webkit-scrollbar {
-    width: 0.25rem;
+    width: 0.75rem;
   }
   
   body::-webkit-scrollbar-track {
@@ -37,7 +38,7 @@
   }
   
   body::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    background: #e10600;
   }
   
   main {
@@ -191,7 +192,137 @@
       left: 0px;
     }
   }
+
+        /** PILOTE INDEX **/
+
+   a .pilote {
+      text-decoration:none;
+      color:#fff;
+  }
+  section {
+      padding: 5rem 0;
+      background-color:#fff;
+
+  }
+  .heading{
+      text-transform: uppercase;
+      font-size:3.5rem;
+      letter-spacing:3px;
+      margin-right:-3px;
+      margin-bottom:5rem;
+      text-align:center;
+      color:#333;
+      position:relative;
+
+  }
+
+  .heading::after {
+      content:'';
+      width:10rem;
+      height:.8rem;
+      background-color:#45e19f;
+      position:absolute;
+      bottom:-2rem;
+      left:50%;
+      transform:translateX(-50%);
+      border-radius:2rem;
+  }
+  .card-wrapper {
+    display:flex;
+    align-items:center;
+    align-content:center;
+    flex-direction:column;
+  }
+ 
+  .card {
+      width:21rem;
+      height:25rem;
+      opacity:0;
+      animation-name:fadeIn;
+      animation-duration:1s;
+      animation-fill-mode:forwards;
+      background-color:#ebeef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 2rem 0;
+      box-shadow: .5rem .5rem 3rem rgba(0,0,0,0.2);
+
+  }
+  @keyframes fadeIn{
+0% {
+  opacity:0;
+}
+100% {
+  opacity:1;
+}
+  }
+  .card .card-img {
+      width:100%;
+      height:13rem;
+      object-fit:cover;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 66%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 66%, 0 100%);
+  }
+  .profile-img {
+      height:10rem;
+      width:10rem;
+      object-fit:cover;
+      border-radius:50%;
+      margin-top:-5.5rem;
+      z-index:999;
+      border: 0.5rem solid #ebeef8;
+
+
+  }
+  .card h1 {
+      font-size:1.25rem;
+      color:#333;
+      margin:0.75rem 0;
+
+  }
+  .job-title {
+      color:#777;
+      font-size:1rem;
+      font-weight:300;
+
+  }
+
+  .card .btn {
+padding: 0.5rem 1.25rem;
+background-color:#445ae3;
+border-radius:2rem;
+margin: 0.25rem 0;
+margin-bottom:0.5rem;
+ text-transform:uppercase;
+ color:#eee;
+ font-size:0.7rem;
+   }
+
+  .card .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: .25rem .25rem 1rem rgba(0,0,0,0.2);
+  }
+   .card .btn:active {
+      transform: translateY(0);
+      box-shadow:none;
+  }
   
+  @media all and (min-width:700px) {
+    .card-wrapper {
+      display:flex;
+      flex-direction:row;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+    }
+    .card {
+      margin:1rem;
+    }
+ 
+  }
+  
+
 
   
   

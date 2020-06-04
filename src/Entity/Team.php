@@ -50,6 +50,11 @@ class Team
      * @ORM\OneToMany(targetEntity=Stats::class, mappedBy="team", orphanRemoval=true)
      */
     private $stats;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cover;
     
      /**
      * Permet d'intialiser le slug
@@ -184,6 +189,18 @@ class Team
                 $stat->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }

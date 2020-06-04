@@ -83,13 +83,15 @@ class AppFixtures extends Fixture
             $nomteam = 'ferrari';
             $moteur = 'ferrari';
             $pays = $faker->country();
+            $cover = $faker->imageUrl(150,200);
 
 
             
 
             $team->setNom($nomteam)
                  ->setMoteur($moteur)
-                 ->setPays($pays);
+                 ->setPays($pays)
+                 ->setCover($cover);
 
                  $manager->persist($team); 
                

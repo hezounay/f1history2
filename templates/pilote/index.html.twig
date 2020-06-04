@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PiloteController!{% endblock %}
+
+{% block body %}
+<section>
+    <h1 class="heading">Pilotes</h1>
+<div class="container">
+  
+   <div class="card-wrapper">
+        {% for pilote in pilotes %}
+   
+
+   {% include 'pilote/_pilote.html.twig' %}
+
+
+    {% endfor %}
+
+</div>
+</div>
+    </section>
+{% endblock %}
