@@ -15,6 +15,9 @@
     },
     "dependencies": {
         "jquery": "^3.5.1",
-        "popper.js": "^1.14.3"
+        "popper.js": "^1.14.3",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-router-dom": "^5.2.0"
     }
 }

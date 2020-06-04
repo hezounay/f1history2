@@ -39,11 +39,7 @@ class Stats
      */
     private $grandPrix;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\OrderBy({"order" = "ASC", "id" = "ASC"})
-     */
-    private $chrono;
+ 
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -61,6 +57,11 @@ class Stats
      * @ORM\JoinColumn(nullable=false)
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $chrono;
 
 
 
@@ -88,17 +89,6 @@ class Stats
 
    
 
-    public function getChrono()
-    {
-        return $this->chrono;
-    }
-
-    public function setChrono($chrono)
-    {
-        $this->chrono = $chrono;
-
-        return $this;
-    }
 
    
 
@@ -158,6 +148,18 @@ class Stats
     public function setDate(?GrandPrix $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getChrono(): ?string
+    {
+        return $this->chrono;
+    }
+
+    public function setChrono(string $chrono): self
+    {
+        $this->chrono = $chrono;
 
         return $this;
     }

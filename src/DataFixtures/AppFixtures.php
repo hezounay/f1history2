@@ -122,8 +122,9 @@ class AppFixtures extends Fixture
         for($m=1 ; $m <= 1; $m++){ 
 
             $stats = new Stats();
-
-            $chrono=2694124;
+        $mytime=mt_rand(20,25);
+        $myminute=mt_rand(30,59);
+            $chrono="1:$mytime'$myminute.256";
             
             
            

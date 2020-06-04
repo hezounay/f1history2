@@ -5,9 +5,8 @@
         <title>F1 History Administration - {% block title %}{% endblock %}</title>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
-        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-        <script src="{{ asset('build/app.js') }}"></script>
-        {% block stylesheets %}{% endblock %}
+   
+        {% block stylesheets %}   {{ encore_entry_link_tags('app') }}{% endblock %}
     </head>
  
         
@@ -17,6 +16,6 @@
 
         {% include 'admin/partials/footer.html.twig' %}
 
-        {% block javascripts %}{% endblock %}
 
 </html>
+ {% block javascripts %}   {{ encore_entry_script_tags('app') }}{% endblock %}

@@ -148,15 +148,16 @@ class AdminGrandPrixController extends AbstractController
      * @param Stats $stats
      * @return Response
      */
-    public function show($slug, GrandPrix $grandprix,StatsRepository $statsRepository){
+    public function show($slug, GrandPrixRepository $repo){
 
-        $statsRepository->orderByChrono();
-        
-        
+       // $repo->showGP($slug,"ASC");
+       // dd($repo);
+        $repo->findOneBySlug($slug);
+       
 
         return $this->render('admin/grand_prix/show.html.twig',[
-          'grandprix' => $grandprix,
-          'chrono' => $statsRepository->orderByChrono()
+          'grandprix' => $repo
+          
         
         ]);
 

@@ -89,20 +89,6 @@ class AdminStatsController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-        $chrono=$stats->getChrono();
-        $chronohour=$chrono/3600000;
-        $chronominutes=$chrono/60000;
-        $chronoseconds=$chrono/1000;
-        $chronomilliseconds=$chrono;
-        $chronoTot= $chronohour.':'.$chronominutes."'".$chronoseconds.".".$chronomilliseconds;
-         //  $chrono=$stats->getChrono();
-         //  $chronohour=str_split(":",$chrono)[0];
-        //   $chronominutes=str_split("'",str_split(":",$chrono)[1])[0];
-        //   $chronoseconds=str_split(".",str_split("'",str_split(":",$chrono)[1])[1])[0];
-        //   $chronomilliseconds=str_split(".",str_split("'",str_split(":",$chrono)[1])[1])[1];
-        //   dd($chronohour.'-'.$chronominutes.'-'.$chronoseconds.'-'. $chronomilliseconds);
-
-        //    $chronotot= $chronohour.':'.$chronominutes."'".$chronoseconds.".".$chronomilliseconds;
 
             $manager->persist($stats);
             $manager->flush();
@@ -113,8 +99,8 @@ class AdminStatsController extends AbstractController
             );
 
             return $this->redirectToRoute('admin_stats_index',[
-                'slug' => $stats->getSlug(),
-                'chrono'=> $chronoTot
+              
+               
             ]);
         }
 
