@@ -93,9 +93,13 @@ class AdminStatsController extends AbstractController
             $manager->persist($stats);
             $manager->flush();
 
+            $piloteNom=$stats->getPilote()->getNom();
+            $gpnom=$stats->getGrandPrix()->getTitle();
+            $gpdate=$stats->getGrandPrix()->getDate();
+            $piloteNom=$stats->getPilote()->getNom();
             $this->addFlash(
                 'success',
-                "Les Statistiques de <strong>X</strong> au <strong>X</strong> en X ont bien été enregistrées ! "
+                "Les Statistiques de <strong>$piloteNom</strong> au <strong>$gpnom</strong> en $gpdate ont bien été enregistrées ! "
             );
 
             return $this->redirectToRoute('admin_stats_index',[

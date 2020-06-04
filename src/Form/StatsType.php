@@ -39,11 +39,11 @@ class StatsType extends AbstractType
                 return $grandprix->getDate();
             }
         ])
-        ->add('chrono', IntegerType::class, [
+        ->add('chrono', TextType::class, [
             'label' => 'Chrono',
            
             'attr' => [
-                'placeholder'=>"Chrono effectué"
+                'placeholder'=>"Chrono effectué:"
             ]
         ])
             ->add('pilote', EntityType::class, [

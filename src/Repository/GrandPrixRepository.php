@@ -18,8 +18,7 @@ class GrandPrixRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, GrandPrix::class);
     }
-
-
+   
     public function showGP($slug , $order) {
 
         return $this->createQueryBuilder('g')

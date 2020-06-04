@@ -1,7 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block title %}Edition du Grand Prix {{grandprix.title}}{% endblock %}
-{% form_theme myForm 'bootstrap_4_layout.html.twig' %}
+
 {% form_theme myForm 'admin/grand_prix/_collection.html.twig' %}
 
 
@@ -12,9 +12,9 @@
         {{form_start(myForm)}}
         <div class="row">
             <div class="col">
-                <div class="card bg-light">
-                    <div class="card-header">
-                        <h4 class="card-title">Corriger le Grand Prix?</h4>
+                <div class="card-gp bg-light">
+                    <div class="card-gp-header">
+                        <h4 class="card-gp-title">Corriger le Grand Prix?</h4>
                     </div>
                     <div class="card-body">
                         {{form_widget(myForm)}}
@@ -65,46 +65,6 @@
 
 
 {% block javascripts %}
-    <script>
-    $('#add-image').click(function () {
-  console.log('add-image')
-  // compter combien j'ai de form-group pour les indices ex: grand_prix_images_0_url
-  const index = +$('#widgets-counter').val() // le + permet de transformer en nombre pcq val() rend tjrs un type string
-
-  // récup le prototype des entrées data-prototype
-  const tmpl = $('#grand_prix_images').data('prototype').replace(/__name__/g, index) // drapeau g pour indiquer qu'on va le faire plusieurs fois
-
-  // injecter le code dans la div
-  $('#grand_prix_images').append(tmpl)
-
-  $('#widgets-counter').val(index + 1)
-
-  // gère le bouton supprimer
-
-  handleDeleteButtons()
-})    
-
-function updateCounter () {
-  const count = +$('#grand_prix_images div.form-group').length
-
-  $('#widgets-counter').val(count)
-}
-
-function handleDeleteButtons () {
-  $('button[data-action="delete"]').click(function () {
-    const target = this.dataset.target // dataset (les attributs data et je veux le target)
-    $(target).remove()
-  })
-}
-
-updateCounter()
-handleDeleteButtons()
-
-        $(document).ready(function(){
-            $('[data-action="delete"]').on('click',function(){
-                const target = this.dataset.target
-                $(target).remove()
-            })
-        })
-    </script>
+{{ encore_entry_script_tags('app') }}
+  
 {% endblock %}

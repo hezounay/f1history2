@@ -19,17 +19,15 @@ class StatsRepository extends ServiceEntityRepository
         parent::__construct($registry, Stats::class);
     }
 
-    /**
-      * @return Stats[] Returns an array of Stats objects
-      */
-    
-      public function orderByChrono(){
-        return $this->createQueryBuilder('a')
-                    ->select('a.chrono')
-                    ->orderBy('a.chrono','ASC')
+    public function myOrderStats($slug, $order){
+        return $this->createQueryBuilder('s')
+                    ->join('s.grandPrix','g')
+                    ->andWhere('g.slug = :myslug')
+                    ->setParameter('myslug', $slug)
+                    ->orderBy('s.chrono', $order)
                     ->getQuery()
                     ->getResult()
-                    ;
+        ;
     }
     
 

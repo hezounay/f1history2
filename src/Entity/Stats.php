@@ -21,12 +21,6 @@ class Stats
      */
     private $id;
 
-
-
- 
-
-  
-
     /**
      * @ORM\ManyToOne(targetEntity=Pilote::class, inversedBy="stats")
      * @ORM\JoinColumn(nullable=false)

@@ -142,25 +142,25 @@ class AdminGrandPrixController extends AbstractController
 
     }
 
-   /**
+  /**
      * @Route("/admin/grandprix/{slug}", name="admin_grandprix_show")
      * 
      * @param Stats $stats
      * @return Response
      */
-    public function show($slug, GrandPrixRepository $repo){
+    public function show($slug, GrandPrix $gp, StatsRepository $repo){
 
-       // $repo->showGP($slug,"ASC");
-       // dd($repo);
-        $repo->findOneBySlug($slug);
-       
-
-        return $this->render('admin/grand_prix/show.html.twig',[
-          'grandprix' => $repo
-          
         
-        ]);
-
-    }
-
+        $stats = $repo->myOrderStats($slug, 'ASC');
+        
+ 
+         return $this->render('admin/grand_prix/show.html.twig',[
+ 
+           'grandprix' => $gp,
+           'myStats' => $stats
+           
+         
+         ]);
+ 
+     }
 }
