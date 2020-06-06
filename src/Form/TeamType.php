@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -29,18 +30,11 @@ class TeamType extends AbstractType
         $builder
         ->add('nom', TextType::class, [
             'label' => 'Ecurie',
+            'attr' => [
+                'placeholder'=>"Nom de l'écurie"
+            ]
           ])
-      //    ->add('pilotes', EntityType::class, [
-      //      'label' => 'Pilote',
-       //     'attr' => [
-        //        'placeholder'=>"Ecurie du Pilote"
-         //   ],
-          //  'class' => Pilote::class,
-            //'choice_label' => function($pilote){
-              //  return $pilote->getPrenom().' '. $pilote->getNom();
-           // }
-        //])
-        
+
             ->add('moteur', TextType::class, [
                 'label' => 'Moteur',
                 'attr' => [
@@ -57,8 +51,13 @@ class TeamType extends AbstractType
                 ]
             ])
 
+            ->add('champion', IntegerType::class, [
+                'label' => 'Titres(s)',
+                'attr' => [
+                    'placeholder'=>"Nombre de titre(s) de champion des constructeurs"
+                ]
+            ]);
             
-            ;
             
             
             

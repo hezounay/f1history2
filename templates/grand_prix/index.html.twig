@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PiloteController!{% endblock %}
+
+{% block body %}
+<section>
+    <h1 class="heading">Grand Prix</h1>
+<div class="container">
+  
+<ul class="list-group list-group-horizontal-xl justify-content-center">
+  <a href="{{path('_2016')}}"><li class="list-group-item mr-3">2016</li></a>
+  <a href="{{path('_2016')}}"><li class="list-group-item mr-3">2017</li></a>
+  <a href="{{path('_2016')}}"><li class="list-group-item mr-3">2018</li></a>
+  <a href="{{path('_2016')}}"><li class="list-group-item mr-3">2019</li></a>
+
+
+
+
+</ul>
+
+
+
+
+
+   <div class="card-wrapper">
+        {% for grandprix in grandprix %}
+   
+
+   {% include 'grand_prix/_grandprix.html.twig' %}
+
+
+    {% endfor %}
+
+    </div>
+</div>
+  </div>
+</div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}  {{ encore_entry_script_tags('app') }}
+{% endblock %}

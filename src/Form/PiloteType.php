@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -71,13 +72,28 @@ class PiloteType extends AbstractType
             ->add('actif', CheckboxType::class, [
                 'label' => 'Activité',
                 'required'=>false
-
-                
-                    
-                
-               
                 ]
-            );
+                
+            )
+            ->add('poles', IntegerType::class, [
+                'label' => 'Pole(s)',
+                'attr' => [
+                    'placeholder'=>"Nombre de pole(s) position"
+                ]
+            ])
+            ->add('wins', IntegerType::class, [
+                'label' => 'Victoire(s)',
+                'attr' => [
+                    'placeholder'=>"Nombre de victoire(s) "
+                ]
+            ])
+            ->add('champion', IntegerType::class, [
+                'label' => 'Titres(s)',
+                'attr' => [
+                    'placeholder'=>"Nombre de titre(s) de champion du monde"
+                ]
+            ]);
+          
             
 
     }

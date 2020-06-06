@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-        <script src="{{ asset('build/app.js') }}"></script>
+
         {% block stylesheets %} <style>
         @font-face {
     font-family: "formularegu";
@@ -69,6 +69,10 @@
   .nav-item {
     width: 100%;
     
+  }
+  .gpindex {
+
+    items-align:center;
   }
   
 
@@ -138,6 +142,16 @@
     font-family: 'formularegu';
     transition: var(--transition-speed);
   }
+
+  .dropdown-menu {
+    background-color:var(--bg-primary);
+    transition: var(--transition-speed);
+
+  }
+  .dropdown-menu a:hover {
+    background-color:var(--bg-secondary);
+    transition: var(--transition-speed);
+  }
  
   
   /* Small screens */
@@ -147,6 +161,10 @@
       width: 100vw;
       height: 5rem;
     }
+    .mapcontent{
+    border-bottom:2px solid black;     
+    border-top:none;     
+  } 
   
     .logo {
       display: none;
@@ -164,6 +182,13 @@
     main {
       margin: 0;
     }
+      .dropdown {
+display:none;
+
+  }
+  .dropdown-menu a:hover {
+
+  }
   }
   
   /* Large screens */
@@ -173,7 +198,10 @@
       width: 5rem;
       height: 100vh;
     }
-  
+    .gp {
+  display:none;
+
+  }
     .navbar:hover {
       width: 16rem;
     }
@@ -191,7 +219,11 @@
     {
       left: 0px;
     }
+     .mapcontent{
+    border-right:2px solid black;     
+  } 
   }
+ 
 
         /** PILOTE INDEX **/
 
@@ -290,9 +322,10 @@
 
   .card .btn {
 padding: 0.5rem 1.25rem;
-background-color:#445ae3;
+background-color:#23232e;
 border-radius:2rem;
 margin: 0.25rem 0;
+transition:0.5s;
 margin-bottom:0.5rem;
  text-transform:uppercase;
  color:#eee;
@@ -300,6 +333,7 @@ margin-bottom:0.5rem;
    }
 
   .card .btn:hover {
+      background-color:#141418;
       transform: translateY(-1px);
       box-shadow: .25rem .25rem 1rem rgba(0,0,0,0.2);
   }
@@ -321,7 +355,54 @@ margin-bottom:0.5rem;
     }
  
   }
-  
+  .slide_gp {
+    width:100%;
+    height:35rem;
+    box-shadow: .5rem .5rem 2rem rgba(0,0,0,0.2);
+  }
+  .slide_gp img {
+    object-fit:cover;
+   
+    width:100%;
+    
+    height:35rem;
+  }
+  .spangp {
+    position:absolute;
+    left:50%;
+    top:30%;
+    transform:translate(-50%,-50%);
+    color:white;
+    font-size:5rem;
+    text-shadow: .5rem .5rem 0.5rem rgba(0,0,0,1);
+
+  }
+   .map {
+    object-fit:cover;
+   
+    width:100%;
+    position:relative;
+    height:100%;
+  }
+  /**  TABLEAUX **/
+
+  td a {
+    text-decoration:none;
+    color:#23232e;
+    transition:0.5s;
+  }
+  td a:hover {
+    color:#141418;
+text-transform: translateY(-5px);   
+
+  }
+  .picture {
+    width:35rem;
+    height:20rem;
+  }
+.resume{
+  border: 1px solid black;
+}
 
 
   
@@ -339,3 +420,4 @@ margin-bottom:0.5rem;
       
  
 </html>
+ {% block javascripts %}   {{ encore_entry_script_tags('app') }}{% endblock %}

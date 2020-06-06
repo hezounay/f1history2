@@ -68,6 +68,25 @@ class Pilote
     private $picture;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $wins;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $poles;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $champion;
+
+ 
+
+  
+
+    /**
      * Permet d'intialiser le slug
      *
      * @ORM\PrePersist
@@ -219,4 +238,44 @@ class Pilote
 
         return $this;
     }
+
+    public function getWins(): ?int
+    {
+        return $this->wins;
+    }
+
+    public function setWins(int $wins): self
+    {
+        $this->wins = $wins;
+
+        return $this;
+    }
+
+    public function getPoles(): ?int
+    {
+        return $this->poles;
+    }
+
+    public function setPoles(int $poles): self
+    {
+        $this->poles = $poles;
+
+        return $this;
+    }
+
+    public function getChampion(): ?int
+    {
+        return $this->champion;
+    }
+
+    public function setChampion(int $champion): self
+    {
+        $this->champion = $champion;
+
+        return $this;
+    }
+
+
+
+
 }

@@ -56,6 +56,28 @@ class GrandPrix
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cover;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $km;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $laps;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $turns;
+
+ 
+
     public function __construct()
     {
         $this->stats = new ArrayCollection();
@@ -216,4 +238,42 @@ class GrandPrix
 
         return $this;
     }
+
+    public function getKm(): ?string
+    {
+        return $this->km;
+    }
+
+    public function setKm(string $km): self
+    {
+        $this->km = $km;
+
+        return $this;
+    }
+
+    public function getLaps(): ?string
+    {
+        return $this->laps;
+    }
+
+    public function setLaps(string $laps): self
+    {
+        $this->laps = $laps;
+
+        return $this;
+    }
+
+    public function getTurns(): ?int
+    {
+        return $this->turns;
+    }
+
+    public function setTurns(int $turns): self
+    {
+        $this->turns = $turns;
+
+        return $this;
+    }
+
+   
 }

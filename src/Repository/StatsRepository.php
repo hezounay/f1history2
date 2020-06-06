@@ -29,6 +29,17 @@ class StatsRepository extends ServiceEntityRepository
                     ->getResult()
         ;
     }
+    public function myOrderStatsWithoutSlug($title,$order){
+        return $this->createQueryBuilder('s')
+                    ->join('s.grandPrix','g')
+                    ->andWhere('g.title = :mytitle')
+                    ->setParameter('mytitle', $title)
+                    ->orderBy('s.chrono', $order)
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
+   
     
 
     /*

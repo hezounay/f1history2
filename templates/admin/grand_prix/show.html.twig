@@ -31,8 +31,8 @@
         <td>{{loop.index}}</td>
 
         <td><a href="{{path('admin_pilote_index')}}">{{stats.pilote.prenom}}</a></td>
-        <td>{{stats.pilote.nom}}</td>
-        <td>{{stats.pilote.team.nom}}</td>
+        <td><a href="{{path('admin_pilote_index')}}">{{stats.pilote.nom}}</a></td>
+        <td><a href="{{path('admin_team_index')}}">{{stats.pilote.team.nom}}</a></td>
 
         <td>{{stats.pilote.nationalite}}</td>
         <td>{{stats.chrono}}</td>

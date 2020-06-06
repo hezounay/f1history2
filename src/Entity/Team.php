@@ -55,6 +55,11 @@ class Team
      * @ORM\Column(type="string", length=255)
      */
     private $cover;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $champion;
     
      /**
      * Permet d'intialiser le slug
@@ -201,6 +206,18 @@ class Team
     public function setCover(string $cover): self
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getChampion(): ?int
+    {
+        return $this->champion;
+    }
+
+    public function setChampion(int $champion): self
+    {
+        $this->champion = $champion;
 
         return $this;
     }

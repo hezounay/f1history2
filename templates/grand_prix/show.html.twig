@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PiloteController!{% endblock %}
+
+{% block body %}
+
+<div class="slide_gp" style="height:20rem;">
+  <span class='spangp' style="top:15%;">{{grandprix.title}}</span>
+  <img src="{{grandprix.cover}}" alt="" style="height:20rem;">
+</div>
+<br>
+<br>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-12 col-md-6 mapcontent">
+      <img src="{{grandprix.map}}" alt="" class="map">
+    </div>
+
+    <div class="col-12 col-md-6">
+
+      <table class="table mt-5">
+
+        <tr>
+          <th>Virages</th>
+          <td>{{grandprix.turns}}</td>
+        </tr>
+        <tr>
+          <th>Kilomètres</th>
+          <td>{{grandprix.km}}</td>
+        </tr>
+        <tr>
+          <th>Tours</th>
+          <td>{{grandprix.laps}}</td>
+        </tr>
+
+
+
+      </table>
+
+
+
+
+    </div>
+
+
+  </div>
+</div>  
+  <br>
+  <br>
+  <div class="container" style="padding-top:100px;">
+    <div class="row">
+      <div class="col-md-12 mb-3">
+
+        <div class="bd-example">
+          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              {% for image in grandprix.images %}
+              <li data-target="#carouselExampleCaptions" data-slide-to="{{ loop.index0 }}"
+                {% if loop.first %}class="active" {% endif %}></li>
+              {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+
+              {% for image in grandprix.images %}
+              <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <img src="{{ image.url }}" class="d-block w-100" alt="image de {{ grandprix.title }}">
+
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>    
+          <div class="container" style="padding-top:100px;">
+            <h2>Classement final</h2>
+            <hr>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Position</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Team</th>
+                    <th>Nationalité</th>
+                    <th>Temps</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for stats in myStats %}
+                  <tr>
+
+                    <td>{{loop.index}}</td>
+
+                    <td><a href="{{path('pilote_show', {'slug':stats.pilote.slug})}}"
+                        style='text-decoration:none;'>{{stats.pilote.prenom}}</a></td>
+                    <td><a href="{{path('pilote_show', {'slug':stats.pilote.slug})}}"
+                        style='text-decoration:none;'>{{stats.pilote.nom}}</a></td>
+                    <td><a href="{{path('team_show', {'slug':stats.team.slug})}}"
+                        style='text-decoration:none;'>{{stats.pilote.team.nom}}</a></td>
+
+                    <td>{{stats.pilote.nationalite}}</td>
+                    <td>{{stats.chrono}}</td>
+
+
+                  </tr>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {% endblock %}

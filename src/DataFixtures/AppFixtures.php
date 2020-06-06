@@ -45,26 +45,34 @@ class AppFixtures extends Fixture
 
             $title = $faker->country();
             $dategp =mt_rand(2014,2019);
-            $map = $faker->imageUrl(350,350);
+            $laps =mt_rand(44,78);
+            $turns =mt_rand(12,21);
+            $km =mt_rand(3.500,7.500);
+            $map = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Circuit_Spa_2007.png/280px-Circuit_Spa_2007.png';
             $description ="<p>".join("</p><p>",$faker->paragraphs(3))."</p>";
+            $covergp = $faker->imageUrl(1920,1080);
 
             $gp->setTitle($title." Grand-Prix")
                ->setDate($dategp)
                ->setMap($map)
-               ->setDescription($description);
-
+               ->setDescription($description)
+               ->setCover($covergp)
+               ->setLaps($laps)
+               ->setKm($km)
+               ->setTurns($turns);
+              
                
         //gestion des images des Grands-Prix
 
          for($j=1; $j <= mt_rand(2,5) ; $j++){
 
-            $cover = new Image();
+            $gallery = new Image();
 
-            $cover->setUrl($faker->imageUrl())
+            $gallery->setUrl($faker->imageUrl(650,300))
                 ->setCaption($faker->sentence())
                 ->setGrandprix($gp);
-
-            $manager->persist($cover);
+                
+            $manager->persist($gallery);
         } 
 
 
@@ -84,14 +92,15 @@ class AppFixtures extends Fixture
             $moteur = 'ferrari';
             $pays = $faker->country();
             $cover = $faker->imageUrl(150,200);
-
+            $championteam = mt_rand(0,30);
 
             
 
             $team->setNom($nomteam)
                  ->setMoteur($moteur)
                  ->setPays($pays)
-                 ->setCover($cover);
+                 ->setCover($cover)
+                 ->setChampion($championteam);
 
                  $manager->persist($team); 
                
@@ -105,7 +114,10 @@ class AppFixtures extends Fixture
             $picture = $faker->imageUrl(150,200);
             $datenaissance =$faker->DateTime();
             $nationalite = $faker->country();
-            $actif = $faker->boolean($chanceOfGettingTrue = 50);   
+            $actif = $faker->boolean($chanceOfGettingTrue = 50);
+            $wins =mt_rand(0,78);
+            $poles =mt_rand(0,80);
+            $champion =mt_rand(0,8);   
             
 
             $pilote->setprenom($prenom)
@@ -114,7 +126,10 @@ class AppFixtures extends Fixture
                ->setNationalite($nationalite)
                ->setActif($actif)
                ->setPicture($picture)
-               ->setTeam($team);
+               ->setTeam($team)
+               ->setWins($wins)
+               ->setPoles($poles)
+               ->setChampion($champion);
                
 
                 // gestion des Stats

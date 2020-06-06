@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -39,6 +40,12 @@ class GrandPrixType extends AbstractType
                     'placeholder'=>"ajoutez l'URL de la carte du circuit"
                 ]
             ])
+            ->add('cover', UrlType::class, [
+                'label' => 'Photo',
+                'attr' => [
+                    'placeholder'=>"Photo de couverture"
+                ]
+            ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description détaillée',
                 'attr' => [
@@ -54,7 +61,25 @@ class GrandPrixType extends AbstractType
                     'allow_add' => true, // permet d'ajouter de nouveaux éléments et ajouter un data_prototype (HTML)
                     'allow_delete' => true // permet de supprimer des éléments
                 ]
-                );
+                )
+                ->add('laps', TextType::class, [
+                    'label' => 'Tours',
+                    'attr' => [
+                        'placeholder'=>"Nombre de tours que compte le Grand Prix"
+                    ]
+                ])
+                ->add('km', TextType::class, [
+                    'label' => 'Longueur',
+                    'attr' => [
+                        'placeholder'=>"Longueur du circuit"
+                    ]
+                ])
+                ->add('turns', IntegerType::class, [
+                    'label' => 'Virages',
+                    'attr' => [
+                        'placeholder'=>"Nombre de virages que compte le Grand Prix"
+                    ]
+                ]);
 
            
            

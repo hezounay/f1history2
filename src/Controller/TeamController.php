@@ -9,14 +9,14 @@ use App\Repository\PiloteRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PiloteController extends AbstractController
+class TeamController extends AbstractController
 {
     /**
-     * @Route("/pilote", name="pilote")
+     * @Route("/team", name="team")
      */
     public function index(PiloteRepository $piloteRepo,TeamRepository $teamRepo)
     {
-        return $this->render('pilote/index.html.twig', [
+        return $this->render('team/index.html.twig', [
             'pilotes' => $piloteRepo->findAll(),
             'teams' => $teamRepo->findAll()
           
@@ -25,16 +25,18 @@ class PiloteController extends AbstractController
 
 
  /**
-     * @Route("/pilote/{slug}", name="pilote_show")
+     * @Route("/team/{slug}", name="team_show")
      *
      * @return Response
      */
-    public function show($slug, Pilote $pilote, PiloteRepository $repo){
+    public function show($slug, Team $team, TeamRepository $repo){
 
+   
         
 
-        return $this->render('pilote/show.html.twig',[
-          'pilote' => $pilote
+        return $this->render('team/show.html.twig',[
+          'team' => $team,
+         
         ]);
     }
      }

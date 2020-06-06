@@ -1,0 +1,28 @@
+ {% extends 'base.html.twig' %}
+
+
+ {% block title %}Hello PiloteController!{% endblock %}
+
+{% block body %}
+<div class="slide_gp">
+<span class='spangp'>SAISON 2017</span>
+<img src="{{ asset('images/2017.jpg') }}" alt="">
+</div>
+<br>
+<br>
+<br>
+
+<div class="container">
+ <div class="card-wrapper">
+        {% for grandprix in grandprix | filter((grandprix) => grandprix.date == 2017)%}
+   
+
+   {% include 'grand_prix/_grandprix.html.twig' %}
+
+
+    {% endfor %}
+
+    </div>
+    </div>
+</div>
+{% endblock %}
