@@ -82,6 +82,11 @@ class Pilote
      */
     private $champion;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
  
 
   
@@ -271,6 +276,18 @@ class Pilote
     public function setChampion(int $champion): self
     {
         $this->champion = $champion;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

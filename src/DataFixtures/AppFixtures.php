@@ -117,7 +117,8 @@ class AppFixtures extends Fixture
             $actif = $faker->boolean($chanceOfGettingTrue = 50);
             $wins =mt_rand(0,78);
             $poles =mt_rand(0,80);
-            $champion =mt_rand(0,8);   
+            $champion =mt_rand(0,8);  
+            $descriptionp ="<p>".join("</p><p>",$faker->paragraphs(3))."</p>"; 
             
 
             $pilote->setprenom($prenom)
@@ -129,7 +130,8 @@ class AppFixtures extends Fixture
                ->setTeam($team)
                ->setWins($wins)
                ->setPoles($poles)
-               ->setChampion($champion);
+               ->setChampion($champion)
+               ->setDescription($descriptionp);
                
 
                 // gestion des Stats

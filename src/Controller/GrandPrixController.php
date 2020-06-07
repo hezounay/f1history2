@@ -48,6 +48,23 @@ class GrandPrixController extends AbstractController
           
         ]);
     }
+         /**
+     * @Route("/grandprix/_2017", name="_2017")
+     * @param Stats $stats
+     */
+    public function index_2017(GrandPrixRepository $grandPrixRepo, StatsRepository $repo)
+    {
+      
+      
+ 
+
+        return $this->render('grand_prix/_2017.html.twig', [
+            'grandprix' => $grandPrixRepo->findAll(),
+   
+            
+          
+        ]);
+    }
       /**
      * @Route("/grandprix/_2018", name="_2018")
      * @param Stats $stats
