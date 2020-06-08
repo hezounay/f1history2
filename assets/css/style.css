@@ -1,7 +1,13 @@
 @font-face {
     font-family:"perfect";
-    src:url("fonts/321Perfect.ttf'") format("truetype");    
+    src:url("/build/fonts/321Perfect.ttf") format("truetype");    
    }
+   @font-face {
+    font-family:"f1";
+    src:url("/build/fonts/Formula1-Bold.otf") format("otf");    
+   }
+
+
    :root {
     font-size: 16px;
 
@@ -61,6 +67,7 @@
   
   .nav-item {
     width: 100%;
+    font-family:"f1";
     
   }
   .gpindex {

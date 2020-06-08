@@ -12,7 +12,12 @@
                   <tr>
               </head>  
         <tbody>
-        {% for stats in grandprix.stats  | slice(0,3) %}
+        <tr>
+        <td>
+        {{grandprix.podium}}
+        </td>
+        </tr>
+        {% for stats in grandprix.stats | slice(0,3) %}
           <tr>
               <td>{{loop.index}}</td>
               <td>{{stats.pilote.nom}}</td>          

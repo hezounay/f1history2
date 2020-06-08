@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\Stats;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+
 use App\Repository\GrandPrixRepository;
+
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -76,12 +79,14 @@ class GrandPrix
      */
     private $turns;
 
- 
+
 
     public function __construct()
     {
+
         $this->stats = new ArrayCollection();
         $this->images = new ArrayCollection();
+       
     }
     
     /**
@@ -98,6 +103,13 @@ class GrandPrix
             $this->slug = $slugify->slugify($this->title.''.$this->date);
         }
 
+    }
+
+    public function getPodium() {
+       
+       
+
+    
     }
 
     public function getId(): ?int
