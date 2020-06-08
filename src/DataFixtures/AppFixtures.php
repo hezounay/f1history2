@@ -93,6 +93,11 @@ class AppFixtures extends Fixture
             $pays = $faker->country();
             $cover = $faker->imageUrl(150,200);
             $championteam = mt_rand(0,30);
+            $championteampilote = mt_rand(0,30);
+            $winsT = mt_rand(0,500);
+            $polesT = mt_rand(0,500);
+            $descriptiont ="<p>".join("</p><p>",$faker->paragraphs(3))."</p>"; 
+            
 
             
 
@@ -100,7 +105,11 @@ class AppFixtures extends Fixture
                  ->setMoteur($moteur)
                  ->setPays($pays)
                  ->setCover($cover)
-                 ->setChampion($championteam);
+                 ->setChampion($championteam)
+                 ->setWins($winsT)
+                 ->setPoles($polesT)
+                 ->setChampionpilote($championteampilote)
+                 ->setDescription($descriptiont);
 
                  $manager->persist($team); 
                

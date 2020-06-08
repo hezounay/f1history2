@@ -60,6 +60,26 @@ class Team
      * @ORM\Column(type="integer")
      */
     private $champion;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $poles;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $championpilote;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $wins;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
     
      /**
      * Permet d'intialiser le slug
@@ -72,7 +92,7 @@ class Team
     public function initializeSlug(){
         if(empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->nom);
+            $this->slug = $slugify->slugify($this->nom.''.$this->wins);
         }
 
     }
@@ -218,6 +238,54 @@ class Team
     public function setChampion(int $champion): self
     {
         $this->champion = $champion;
+
+        return $this;
+    }
+
+    public function getPoles(): ?int
+    {
+        return $this->poles;
+    }
+
+    public function setPoles(int $poles): self
+    {
+        $this->poles = $poles;
+
+        return $this;
+    }
+
+    public function getChampionpilote(): ?int
+    {
+        return $this->championpilote;
+    }
+
+    public function setChampionpilote(int $championpilote): self
+    {
+        $this->championpilote = $championpilote;
+
+        return $this;
+    }
+
+    public function getWins(): ?int
+    {
+        return $this->wins;
+    }
+
+    public function setWins(int $wins): self
+    {
+        $this->wins = $wins;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

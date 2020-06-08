@@ -18,47 +18,47 @@
 
     <div class="col-12 col-md-5">
 
-      <table class="table ">
-      <tr>  <th>Nom</th>
-          <td>{{pilote.prenom}}&nbsp{{pilote.nom}}</td>
+      <table class="table pilote">
+      <tr>  <th style="border-color:transparent;">Nom</th>
+          <td style="border-color:transparent;">{{pilote.prenom}}&nbsp{{pilote.nom}}</td>
       </tr>
      
-      <tr>  <th>Nationalité</th>
-          <td>{{pilote.nationalite}}</td>
+      <tr>  <th style="border-color:#23232e;">Nationalité</th>
+          <td style="border-color:#23232e;">{{pilote.nationalite}}</td>
       </tr>
-       <tr>  <th>Date de naissance</th>
-          <td>{{pilote.datenaissance|date("d/m/Y")}}</td>
+       <tr>  <th style="border-color:#23232e;">Date de naissance</th>
+          <td style="border-color:#23232e;">{{pilote.datenaissance|date("d/m/Y")}}</td>
       </tr>
-        <tr>  <th>Ecurie</th>
-          <td>{{pilote.team.nom}}</td>
+        <tr>  <th style="border-color:#23232e;">Ecurie</th>
+          <td style="border-color:#23232e;">{{pilote.team.nom}}</td>
       </tr>
        
              
       
         {% if pilote.poles > 1 %}
-          <th>Poles</th>
-          <td>{{pilote.poles}}</td>
+          <th style="border-color:#23232e;">Poles</th>
+          <td style="border-color:#23232e;">{{pilote.poles}}</td>
           {% else %}
-           <th>Pole</th>
-          <td>{{pilote.poles}}</td>
+           <th style="border-color:#23232e;">Pole</th>
+          <td style="border-color:#23232e;"> {{pilote.poles}}</td>
           {% endif %}
         </tr>
         <tr>
          {% if pilote.wins > 1 %}
-          <th>Victoires</th>
-          <td>{{pilote.wins}}</td>
+          <th style="border-color:#23232e;"> Victoires</th>
+          <td style="border-color:#23232e;">{{pilote.wins}}</td>
           {% else %}
-           <th>Victoire</th>
-          <td>{{pilote.wins}}</td>
+           <th style="border-color:#23232e;">Victoire</th>
+          <td style="border-color:#23232e;">{{pilote.wins}}</td>
           {% endif %}
         </tr>
         <tr>
          {% if pilote.champion > 1 %}
-          <th>Titres</th>
-          <td>{{pilote.champion}}</td>
+          <th style="border-color:#23232e;">Titres</th>
+          <td style="border-color:#23232e;">{{pilote.champion}}</td>
           {% else %}
-           <th>Titre</th>
-          <td>{{pilote.champion}}</td>
+           <th style="border-color:#23232e;">Titre</th>
+          <td style="border-color:#23232e;">{{pilote.champion}}</td>
           {% endif %}
       
         </tr>

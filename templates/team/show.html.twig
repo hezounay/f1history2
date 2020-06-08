@@ -1,1 +1,101 @@
 {% extends 'base.html.twig' %}
+{% block body %}
+
+
+<div class="slide_gp" style="height:20rem; overflow:hidden;">
+
+  <img src="{{team.cover}}" alt="" style=" object-fit:cover;">
+</div>
+<br>
+<br><br>
+<div class="container">
+
+
+  <div class="row">
+    <div class="col-12 col-md-7">
+    {% for pilote in team.pilotes %} 
+      <img src="{{pilote.picture}}" alt="" class="pictureteam">
+      {% endfor %}
+    </div>
+
+    <div class="col-12 col-md-5">
+
+      <table class="table pilote">
+      <tr>  <th style="border-color:transparent;">Nom</th>
+          <td style="border-color:transparent;">{{team.nom}}</td>
+      </tr>
+     
+      <tr>  <th style="border-color:transparent;">Moteur</th>
+          <td style="border-color:transparent;">{{team.moteur}}</td>
+      </tr>
+       <tr>  <th style="border-color:transparent;">Pays</th>
+          <td style="border-color:transparent;">{{team.pays}}</td>
+      </tr>
+        <tr>  <th style="border-color:transparent;">Pilotes</th>
+                         {% for pilote in team.pilotes %}          
+          <td style="border-color:transparent;">{{pilote.nom}}</td>
+          {% endfor %}
+      </tr>
+       
+             
+         <tr>
+        {% if team.poles > 1 %}
+          <th style="border-color:transparent;">Poles</th>
+          <td style="border-color:transparent;">{{team.poles}}</td>
+          {% else %}
+           <th style="border-color:transparent;">Pole</th>
+          <td style="border-color:transparent;"> {{team.poles}}</td>
+          {% endif %}
+        </tr>
+        <tr>
+         {% if team.wins > 1 %}
+          <th style="border-color:transparent;"> Victoires</th>
+          <td style="border-color:transparent;">{{team.wins}}</td>
+          {% else %}
+           <th style="border-color:transparent;">Victoire</th>
+          <td style="border-color:transparent;">{{team.wins}}</td>
+          {% endif %}
+        </tr>
+        <tr>
+         {% if team.champion > 1 %}
+          <th style="border-color:transparent;">Titres Constructeurs</th>
+          <td style="border-color:transparent;">{{team.champion}}</td>
+          {% else %}
+           <th style="border-color:transparent;">Titre Constructeurs</th>
+          <td style="border-color:transparent;">{{team.champion}}</td>
+          {% endif %}
+             <tr>
+                 {% if team.championpilote > 1 %}
+          <th style="border-color:transparent;">Titres Pilotes</th>
+          <td style="border-color:transparent;">{{team.championpilote}}</td>
+          {% else %}
+           <th style="border-color:transparent;">Titre Pilotes</th>
+          <td style="border-color:transparent;">{{team.championpilote}}</td>
+          {% endif %}
+      
+        </tr>
+
+
+
+      </table>
+
+
+
+
+    </div>
+
+
+  </div>
+<br>
+<br>
+<br>
+<br>
+  <div class="descriptionpilote">
+  <h3>Description</h3>
+  <br>
+  <br>
+  {{team.description| raw}}
+  
+  </div>
+</div> 
+{% endblock %}
