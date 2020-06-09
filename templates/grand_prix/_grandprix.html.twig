@@ -1,4 +1,4 @@
-     <div class="card" style="height:33rem; width:23rem;">
+     <div class="card">
         <img src="{{grandprix.cover}}" alt="Photo du grand prix {{grandprix.title}}" class="card-img" style="top:0%;">
         <h1>{{grandprix.title}}&nbsp{{grandprix.date}}</h1>
         <p class="job-title">
@@ -12,15 +12,11 @@
                   <tr>
               </head>  
         <tbody>
-        <tr>
-        <td>
-        {{grandprix.podium}}
-        </td>
-        </tr>
-        {% for stats in grandprix.stats | slice(0,3) %}
+    
+        {% for stats in grandprix.stats | sort((a,b)=> a.chrono <=> b.chrono) | slice(0,3) %}
           <tr>
               <td>{{loop.index}}</td>
-              <td>{{stats.pilote.nom}}</td>          
+              <td>{{stats.pilote.nom}}</td>
               <td>{{stats.team.nom}}</td>
               <td>{{stats.chrono}}</td>
           </tr>
