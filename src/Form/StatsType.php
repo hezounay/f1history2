@@ -46,6 +46,13 @@ class StatsType extends AbstractType
                 'placeholder'=>"Chrono effectué:"
             ]
         ])
+        ->add('kmh', TextType::class, [
+            'label' => 'Km/h',
+           
+            'attr' => [
+                'placeholder'=>"Km/h moyen"
+            ]
+        ])
             ->add('pilote', EntityType::class, [
                 'label' => 'Pilote',
                 'attr' => [

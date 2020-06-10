@@ -1,12 +1,12 @@
 {% extends 'admin/base.html.twig' %}
-{% block title %}Modification des Statistiques de &nbsp {{pilote.nom}} au {{grandprix.title}}&nbsp{{stats.grandprix.date}}{% endblock %}
+{% block title %}Modification des Statistiques de &nbsp {{stats.pilote.nom}} au {{stats.grandprix.title}}&nbsp{{stats.grandprix.date}}{% endblock %}
 
 {% form_theme myForm 'bootstrap_4_layout.html.twig' %}
 {% block body %}
 <br>
 <br>
     <div class="container-fluid">
-        <h1 class="my-5">Modification des Statistiques de &nbsp {{pilote.nom}} au {{grandprix.title}}&nbsp{{stats.grandprix.date}}</h1>
+        <h1 class="my-5">Modification des Statistiques de &nbsp {{stats.pilote.nom}} au {{stats.grandprix.title}}&nbsp{{stats.grandprix.date}}</h1>
         {{form_start(myForm)}}
         {{form_widget(myForm)}}
 

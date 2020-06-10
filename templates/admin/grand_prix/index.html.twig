@@ -14,7 +14,10 @@
                     <th>Id</th>
                     <th>Pays</th>
                     <th>Date</th>
-                    <th>Carte</th>
+                    <th>Tours</th>
+                    <th>Longueur</th>
+                    <th>Virages</th>
+              
                 <!--    <th>Chronos</th> !-->
 
                     <th class="text-center">Action</th>
@@ -26,7 +29,10 @@
                         <td>{{grandprix.id}}</td>
                         <td><a href="{{ path('admin_grandprix_show', {'slug':grandprix.slug}) }}" style="text-decoration:none;">{{grandprix.title}}</a></td>
                         <td>{{grandprix.date}}</td>
-                        <td>{{grandprix.map}}</td>       
+                        <td>{{grandprix.laps}}</td>
+                        <td>{{grandprix.km}}</td>
+                        <td>{{grandprix.turns}}</td>
+                              
                 
                         <td class="text-center">
                             <a href="{{ path('admin_grandprix_edit', {'id':grandprix.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>

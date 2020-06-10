@@ -105,6 +105,16 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    public function AddUserRole(): array
+    {
+        $roles = $this->roles;
+
+        $roles[] = 'ROLE_ADMIN';
+
+        return array_unique($roles);
+    }
+ 
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;

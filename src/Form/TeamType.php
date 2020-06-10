@@ -50,13 +50,32 @@ class TeamType extends AbstractType
                     'placeholder'=>"ajoutez l'URL de la photo de couverture de la team"
                 ]
             ])
+            ->add('poles', IntegerType::class, [
+                'label' => 'Pole(s) position',
+                'attr' => [
+                    'placeholder'=>"Nombre de pole(s) position"
+                ]
+            ])
+            ->add('wins', IntegerType::class, [
+                'label' => 'Victoire(s)',
+                'attr' => [
+                    'placeholder'=>"Nombre de victoire(s)"
+                ]
+            ])
 
             ->add('champion', IntegerType::class, [
-                'label' => 'Titres(s)',
+                'label' => 'Titres(s) Constructeur',
                 'attr' => [
                     'placeholder'=>"Nombre de titre(s) de champion des constructeurs"
                 ]
+            ])
+            ->add('championpilote', IntegerType::class, [
+                'label' => 'Titres(s) Pilote',
+                'attr' => [
+                    'placeholder'=>"Nombre de titre(s) de champion des pilotes"
+                ]
             ]);
+           
             
             
             

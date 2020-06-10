@@ -57,6 +57,11 @@ class Stats
      */
     private $chrono;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $kmh;
+
 
 
     /**
@@ -154,6 +159,18 @@ class Stats
     public function setChrono(string $chrono): self
     {
         $this->chrono = $chrono;
+
+        return $this;
+    }
+
+    public function getKmh(): ?string
+    {
+        return $this->kmh;
+    }
+
+    public function setKmh(string $kmh): self
+    {
+        $this->kmh = $kmh;
 
         return $this;
     }

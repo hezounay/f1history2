@@ -24,7 +24,7 @@ class StatsRepository extends ServiceEntityRepository
                     ->join('s.grandPrix','g')
                     ->andWhere('g.slug = :myslug')
                     ->setParameter('myslug', $slug)
-                    ->orderBy('s.chrono', $order)
+                    ->orderBy('s.kmh', $order)
                     ->getQuery()
                     ->getResult()
         ;
@@ -34,7 +34,7 @@ class StatsRepository extends ServiceEntityRepository
                     ->join('s.grandPrix','g')
                     ->andWhere('g.slug = :myslug')
                     ->setParameter('myslug', $slug)
-                    ->orderBy('s.chrono', $order)
+                    ->orderBy('s.kmh', $order)
                     ->setMaxResults(3)
                     ->getQuery()
                     ->getResult()

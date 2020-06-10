@@ -26,7 +26,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('appadmin', './assets/css/bootstrap.min.css')
-    .addEntry('appadminjs', './assets/js/bootstrap.min.js')
+ 
     
     //.addEntry('page2', './assets/js/page2.js')
     .addPlugin(new CopyPlugin( 

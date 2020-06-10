@@ -110,7 +110,7 @@ class GrandPrixController extends AbstractController
      */
     public function show($slug, GrandPrix $grandPrix, GrandPrixRepository $grandPrixRepo, StatsRepository $repo){
 
-        $stats = $repo->myOrderStats($slug, 'ASC');
+        $stats = $repo->myOrderStats($slug, 'DESC');
         
 
         return $this->render('grand_prix/show.html.twig', [

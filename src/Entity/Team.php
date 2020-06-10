@@ -76,10 +76,7 @@ class Team
      */
     private $wins;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
+
     
      /**
      * Permet d'intialiser le slug
@@ -92,7 +89,7 @@ class Team
     public function initializeSlug(){
         if(empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->nom.''.$this->wins);
+            $this->slug = $slugify->slugify($this->nom);
         }
 
     }
@@ -278,15 +275,5 @@ class Team
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
 
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 }

@@ -45,7 +45,7 @@ class AdminStatsController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function edit(Stats $stats, Pilote $pilote, GrandPrix $grandprix, Request $request, EntityManagerInterface $manager){
+    public function edit(Stats $stats,  Request $request, EntityManagerInterface $manager){
         $form = $this->createForm(StatsType::class, $stats);
 
         $form->handleRequest($request);
@@ -65,8 +65,6 @@ class AdminStatsController extends AbstractController
 
         return $this->render('admin/stats/edit.html.twig',[
             'stats' => $stats,
-            'pilote' => $pilote,
-            'grandprix' => $grandprix,
             'myForm' => $form->createView()
             
         ]);
