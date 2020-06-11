@@ -33,7 +33,6 @@ class AppFixtures extends Fixture
                 ->setLastName('Dumoulin')
                 ->setEmail('admin@f1.be')
                 ->setPassword($this->encoder->encodePassword($adminUser,'password'))
-                ->setPasswordConfirm($this->encoder->encodePassword($adminUser,'password'))
                 ->setRoles(['ROLE_ADMIN']);
         $manager->persist($adminUser);
 
@@ -108,8 +107,8 @@ class AppFixtures extends Fixture
                  ->setChampion($championteam)
                  ->setWins($winsT)
                  ->setPoles($polesT)
-                 ->setChampionpilote($championteampilote)
-                 ->setDescription($descriptiont);
+                 ->setChampionpilote($championteampilote);
+            
 
                  $manager->persist($team); 
                
@@ -139,8 +138,8 @@ class AppFixtures extends Fixture
                ->setTeam($team)
                ->setWins($wins)
                ->setPoles($poles)
-               ->setChampion($champion)
-               ->setDescription($descriptionp);
+               ->setChampion($champion);
+
                
 
                 // gestion des Stats

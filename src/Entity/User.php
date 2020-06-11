@@ -45,12 +45,6 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @var string The hashed password
-     * @ORM\Column(type="string", length=255)
-     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas correctement confirmé votre mot de passe")
-     */
-    private $passwordConfirm;  
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -178,15 +172,5 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPasswordConfirm(): ?string
-    {
-        return $this->passwordConfirm;
-    }
 
-    public function setPasswordConfirm(string $passwordConfirm): self
-    {
-        $this->passwordConfirm = $passwordConfirm;
-
-        return $this;
-    }
 }

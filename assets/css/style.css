@@ -549,8 +549,37 @@ display:none;
  .descri1 { 
 top:-30px;
  } 
+ .imgdescri8{
+  left: -91px;
+  position: relative;
+  width: 30rem;
+  top: 100px;
+}
+.imgdescri7{
 
+  width: 28rem;
+  top:200px;
+  position:relative;
 
+}
+.imgdescri5 {
+  width: 30rem;
+  height:20rem;
+  top: 334px;
+}
+.imgdescri4{
+  left: -71px;
+  top: 150px;
+}
+.imgdescri6{
+  left: -125px;
+}
+.imgdescri3{
+  left: -95px;
+}
+.imgdescri2{
+  left: -93px;
+}
 
 
 

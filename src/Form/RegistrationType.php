@@ -23,7 +23,7 @@ class RegistrationType extends ApplicationType
             ->add('email', EmailType::class, $this->getConfiguration("Email", "Votre adresse e-mail..."))
             ->add('password', PasswordType::class, $this->getConfiguration("Mot de passe","Veuillez entrer votre mot de passe"))
            
-            ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Confirmation de mot de passe","Veuillez confirmer votre mot de passe"))
+           
             
         ;
     }
