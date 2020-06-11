@@ -8,17 +8,17 @@
                       <th>Position</th>
                       <th>Pilote</th>
                       <th>Team</th>
-                      <th>Chrono</th>
+                      <th>Km/h</th>
                   <tr>
               </head>  
         <tbody>
     
-        {% for stats in grandprix.stats | sort((a,b)=> a.chrono <=> b.chrono) | slice(0,3) %}
+        {% for stats in grandprix.stats | sort((b,a)=> a.kmh <=> b.kmh) | slice(0,3) %}
           <tr>
               <td>{{loop.index}}</td>
               <td>{{stats.pilote.nom}}</td>
               <td>{{stats.team.nom}}</td>
-              <td>{{stats.chrono}}</td>
+              <td>{{stats.kmh}}</td>
           </tr>
         
         {% endfor %}

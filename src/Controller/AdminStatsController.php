@@ -124,7 +124,7 @@ class AdminStatsController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function delete(Stats $stats, Pilote $pilote, GrandPrix $grandprix, Request $request, EntityManagerInterface $manager){
+    public function delete(Stats $stats,EntityManagerInterface $manager){
         // on ne peut pas supprimer une annonce qui possède des Statistiques 
         
         {

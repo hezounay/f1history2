@@ -18,17 +18,37 @@ class StatsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('team', EntityType::class, [
-            'label' => 'Ecurie',
+        ->add('pilote', EntityType::class, [
+            'label' => 'Pilote',
             'attr' => [
-                'placeholder'=>"Ecurie du Pilote",
-                
+                'placeholder'=>"Nom et prénom du Pilote"
+            ],
+            'class' => Pilote::class,
+            'choice_label' => function($pilote){
+                return $pilote->getPrenom().' '.$pilote->getNom();
+            }
+        ])
+        ->add('team', EntityType::class, [
+            'label' => 'Team',
+            'attr' => [
+                'placeholder'=>"Nom de l'écurie"
             ],
             'class' => Team::class,
             'choice_label' => function($team){
                 return $team->getNom();
             }
         ])
+        ->add('grandPrix', EntityType::class, [
+            'label' => 'Grand-Prix',
+            'attr' => [
+                'placeholder'=>"Grand-Prix"
+            ],
+            'class' => GrandPrix::class,
+            'choice_label' => function($grandprix){
+                return $grandprix->getTitle();
+            }
+        ])
+        
         ->add('date', EntityType::class, [
             'label' => 'Année',
             'attr' => [
@@ -53,26 +73,8 @@ class StatsType extends AbstractType
                 'placeholder'=>"Km/h moyen"
             ]
         ])
-            ->add('pilote', EntityType::class, [
-                'label' => 'Pilote',
-                'attr' => [
-                    'placeholder'=>"Nom et prénom du Pilote"
-                ],
-                'class' => Pilote::class,
-                'choice_label' => function($pilote){
-                    return $pilote->getPrenom().' '.$pilote->getNom();
-                }
-            ])
-            ->add('grandPrix', EntityType::class, [
-                'label' => 'Grand-Prix',
-                'attr' => [
-                    'placeholder'=>"Grand-Prix"
-                ],
-                'class' => GrandPrix::class,
-                'choice_label' => function($grandprix){
-                    return $grandprix->getTitle();
-                }
-            ])
+           
+            
         ;
     }
 

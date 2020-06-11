@@ -10,11 +10,13 @@ require('../css/app.css')
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 const $ = require('jquery')
-
+var sal = require('sal.js')
 global.$ = global.jQuery = $
-
+sal();
 require('popper.js')
 require('./bootstrap.min.js')
 require('./script.js')
+
+
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js')

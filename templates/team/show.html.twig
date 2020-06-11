@@ -12,7 +12,7 @@
 
 
   <div class="row">
-    {% for pilote in team.pilotes %} 
+    {% for pilote in team.pilotes | slice(0,2)%} 
     <div class="col-12 col-md-3">
       <img src="{{pilote.picture}}" alt="" class="pictureteam">
       <p style="text-align:center;">{{pilote.nom}}</p>

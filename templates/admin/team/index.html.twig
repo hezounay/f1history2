@@ -29,7 +29,7 @@
                         <td>{{team.nom}}</td>
                         <td>{{team.moteur}}</td>
                         <td>{{team.pays}}</td>
-                         {% for pilote in team.pilotes %}
+                         {% for pilote in team.pilotes | slice(0,2) %}
                         <td>{{pilote.nom}}</td>
                          {% endfor %}
                         

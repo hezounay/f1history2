@@ -77,3 +77,4 @@ $(".step04").click( function() {
 	$("#line-progress").css("width", "100%");
 	$(".production").addClass("active").siblings().removeClass("active");
 });
+sal();
