@@ -6,7 +6,7 @@ use Twig\Environment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class PaginationService{
+class PaginationService {
 
     private $entityClass; // l'entité sur laquelle on doit faire la pagination
     private $limit = 10;

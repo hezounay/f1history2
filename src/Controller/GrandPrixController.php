@@ -103,7 +103,7 @@ class GrandPrixController extends AbstractController
 
 
 
- /**
+    /**
      * @Route("/grandprix/{slug}", name="grandprix_show")
      *
      * @return Response

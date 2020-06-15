@@ -339,9 +339,9 @@ display:none;
 padding: 0.5rem 1.25rem;
 background-color:#23232e;
 border-radius:2rem;
-margin: 0.25rem 0;
+
 transition:0.5s;
-margin-bottom:0.5rem;
+margin-bottom:4.5rem;
  text-transform:uppercase;
  color:#eee;
  font-size:0.7rem;
@@ -366,7 +366,7 @@ margin-bottom:0.5rem;
       align-items:center;
     }
     .card {
-      margin:1rem;
+      margin:2rem;
     }
  
   }
