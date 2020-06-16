@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 
-class GrandPrixType extends AbstractType
+class GrandPrixEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,31 +35,11 @@ class GrandPrixType extends AbstractType
                     'placeholder'=>"Année où le Grand-Prix a eu lieu"
                 ]
             ])
-            ->add('map', FileType::class, [
-                'label' => 'Carte du circuit',
-                'attr' => [
-                    'placeholder'=>"ajoutez l'URL de la carte du circuit"
-                ]
-            ])
-            ->add('cover', FileType::class, [
-                'label' => 'Photo',
-             
-            
-            ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description détaillée',
            
             ])
 
-            ->add(
-                'images',
-                CollectionType::class,
-                [
-                    'entry_type' => ImageType::class,
-                    'allow_add' => true, // permet d'ajouter de nouveaux éléments et ajouter un data_prototype (HTML)
-                    'allow_delete' => true // permet de supprimer des éléments
-                ]
-                )
                 ->add('laps', TextType::class, [
                     'label' => 'Tours',
                     'attr' => [
@@ -86,11 +66,7 @@ class GrandPrixType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => GrandPrix::class,
-            'validation_groups' => [
-                'Default',
-                'front'
-            ]
+            'data_class' => GrandPrix::class
         ]);
     }
 }

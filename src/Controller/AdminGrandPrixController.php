@@ -6,9 +6,12 @@ use App\Entity\Stats;
 use App\Entity\GrandPrix;
 use App\Form\GrandPrixType;
 use App\Service\OrderService;
+use App\Form\GrandPrixEditType;
+use App\Entity\GrandPrixPhotoEdit;
 use App\Service\PaginationService;
-use App\Repository\GrandPrixRepository;
 use App\Repository\StatsRepository;
+use App\Form\GrandPrixPhotoEditType;
+use App\Repository\GrandPrixRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminGrandPrixController extends AbstractController
 {
@@ -39,69 +43,7 @@ class AdminGrandPrixController extends AbstractController
             'pagination' => $pagination
         ]);
     }
-
      /**
-     * Permet d'afficher le formulaire d'édition
-     * @Route("/admin/grandprix/{id}/edit", name="admin_grandprix_edit")
-     * 
-     * @param GrandPrix $grandprix
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
-    public function edit(GrandPrix $grandprix, Request $request, EntityManagerInterface $manager){
-        $form = $this->createForm(GrandPrixType::class,$grandprix);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $manager->persist($grandprix);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                "L'annonce <strong>{$grandprix->getTitle()}</strong> a bien été modifiée"
-            );
-        }
-
-        return $this->render('admin/grand_prix/edit.html.twig',[
-            'grandprix' => $grandprix,
-            'myForm' => $form->createView()
-        ]);
-
-
-    }
-
-     /**
-     * Permet de supprimer un Grand-Prix
-     * @Route("/admin/grand_prix/{id}/delete", name="admin_grandprix_delete")
-     *
-     * @param GrandPrix $grandprix
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
-    public function delete(GrandPrix $grandprix, EntityManagerInterface $manager){
-        // on ne peut pas supprimer une annonce qui possède des Statistiques 
-        if(count($grandprix->getStats()) > 0){
-            $this->addFlash(
-                'warning',
-                "Vous ne pouvez pas supprimer le Grand-Prix de <strong>{$grandprix->getTitle()}</strong> car il possède déjà des statistiques"
-            );
-        }else{
-            $manager->remove($grandprix);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                "L'annonce <strong>{$grandprix->getTitle()}</strong> a bien été supprimée"
-            );
-        }
-
-        return $this->redirectToRoute('admin_grandprix_index');
-
-    }
-    
- /**
      * Permet de créer un Grand-Prix
      * @Route("/admin/grandprix/new", name="admin_grandprix_create")
      * 
@@ -115,6 +57,38 @@ class AdminGrandPrixController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $file = $form['cover']->getData();
+            $file2 = $form['map']->getData();
+            if(!empty($file)){
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try{
+                   $file->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $grandprix->setCover($newFilename);
+            }
+         
+            if(!empty($file2)){
+                $originalFilename = pathinfo($file2->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file2->guessExtension();
+                try{
+                   $file2->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $grandprix->setMap($newFilename);
+            }
+          
 
             foreach($grandprix->getImages() as $image){
                 $image->setGrandPrix($grandprix);
@@ -142,6 +116,147 @@ class AdminGrandPrixController extends AbstractController
 
     }
 
+
+     /**
+     * Permet d'afficher le formulaire d'édition
+     * @Route("/admin/grandprix/{id}/edit", name="admin_grandprix_edit")
+     * 
+     * @param GrandPrix $grandprix
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function edit(GrandPrix $grandprix, Request $request, EntityManagerInterface $manager){
+        $form = $this->createForm(GrandPrixEditType::class,$grandprix);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($grandprix);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "L'annonce <strong>{$grandprix->getTitle()}</strong> a bien été modifiée"
+            );
+        }
+
+        return $this->render('admin/grand_prix/edit.html.twig',[
+            'grandprix' => $grandprix,
+            'myForm' => $form->createView()
+        ]);
+
+
+    }
+
+     /**
+     * Permet d'afficher le formulaire d'édition de la photo
+     * @Route("/admin/grandprix/{id}/edit/photo", name="admin_grandprix_edit_photo")
+     * @param GrandPrix $grandprix
+     */
+    public function editPhoto(GrandPrix $grandprix, Request $request, EntityManagerInterface $manager)
+    {
+        $grandprix = new GrandPrixPhotoEdit();
+        $form = $this->createForm(GrandPrixPhotoEditType::class,$grandprix);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){   
+            if(!empty($grandprix->getCover())){
+              
+                    unlink($this->getParameter('uploads_directory').'/'.$grandprix);
+            
+                   }
+                if(!empty($grandprix->getMap())){
+                   
+                        unlink($this->getParameter('uploads_directory').'/'.$grandprix);
+                
+                
+            }
+            $file = $form['cover']->getData();
+            $file2 = $form['map']->getData();
+           
+            if(!empty($file)){
+                $cover=$grandprix->getCover();
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try{
+                   $file->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $grandprix->setCover($newFilename);
+                unlink($this->getParameter("uploads_directory")."/".$cover);
+  
+            }
+            if(!empty($file2)){
+                $map=$grandprix->getMap();
+                $originalFilename = pathinfo($file2->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file2->guessExtension();
+                try{
+                   $file2->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $grandprix->setMap($newFilename);
+                unlink($this->getParameter("uploads_directory")."/".$map);
+            }
+
+            $manager->persist($grandprix);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le Grand Prix a bien été modifié"
+            );
+            return $this->redirectToRoute("admin_grandprix_index");
+        }
+
+        return $this->render('admin/grand_prix/editPhoto.html.twig',[
+            'grandprix' => $grandprix,
+            'myForm' => $form->createView()
+        ]);
+        
+    }
+
+     /**
+     * Permet de supprimer un Grand-Prix
+     * @Route("/admin/grand_prix/{id}/delete", name="admin_grandprix_delete")
+     *
+     * @param GrandPrix $grandprix
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function delete(GrandPrix $grandprix, EntityManagerInterface $manager){
+        // on ne peut pas supprimer une annonce qui possède des Statistiques 
+        if(count($grandprix->getStats()) > 0){
+            $this->addFlash(
+                'warning',
+                "Vous ne pouvez pas supprimer le Grand-Prix de <strong>{$grandprix->getTitle()}</strong> car il possède déjà des statistiques"
+            );
+        }else{
+            $manager->remove($grandprix);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le Grand Prix <strong>{$grandprix->getTitle()}</strong> a bien été supprimée"
+            );
+        }
+
+        return $this->redirectToRoute('admin_grandprix_index');
+
+    }
+    
+
   /**
      * @Route("/admin/grandprix/{slug}", name="admin_grandprix_show")
      * 
@@ -151,7 +266,7 @@ class AdminGrandPrixController extends AbstractController
     public function show($slug, GrandPrix $gp, StatsRepository $repo){
 
         
-        $stats = $repo->myOrderStats($slug, 'ASC');
+        $stats = $repo->myOrderStats($slug, 'DESC');
         
  
          return $this->render('admin/grand_prix/show.html.twig',[

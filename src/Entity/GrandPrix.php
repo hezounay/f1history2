@@ -4,12 +4,16 @@ namespace App\Entity;
 
 use App\Entity\Stats;
 use Cocur\Slugify\Slugify;
+
+
+
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
-
 use App\Repository\GrandPrixRepository;
-
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @ORM\Entity(repositoryClass=GrandPrixRepository::class)
@@ -36,6 +40,8 @@ class GrandPrix
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Image(mimeTypes={"image/png","image/jpeg","image/gif"}, mimeTypesMessage="Vous devez upload un fichier jpg, png ou gif", groups={"front"})
+     * @Assert\File(maxSize="1024k", maxSizeMessage="taille du fichier trop grande", groups={"front"})
      */
     private $map;
 
@@ -61,6 +67,8 @@ class GrandPrix
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Image(mimeTypes={"image/png","image/jpeg","image/gif"}, mimeTypesMessage="Vous devez upload un fichier jpg, png ou gif", groups={"front"})
+     * @Assert\File(maxSize="1024k", maxSizeMessage="taille du fichier trop grande", groups={"front"})
      */
     private $cover;
 

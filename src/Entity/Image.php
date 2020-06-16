@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
@@ -17,10 +18,7 @@ class Image
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $url;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,11 +31,21 @@ class Image
      */
     private $grandprix;
 
+        /**
+     * Variable utilisé dans le formulaire pour la réception du fichier
+     * @Assert\Image(mimeTypes={"image/png","image/jpeg","image/gif"}, mimeTypesMessage="Vous devez upload un fichier jpg, png ou gif")
+     * @Assert\File(maxSize="1024k", maxSizeMessage="taille du fichier trop grande")
+     */
+    private $url;
+
+
+  
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
+    
     public function getUrl(): ?string
     {
         return $this->url;
@@ -49,6 +57,8 @@ class Image
 
         return $this;
     }
+
+
 
     public function getCaption(): ?string
     {

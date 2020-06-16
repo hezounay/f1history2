@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Modifier photo{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Modifier la photo de couverture et la carte du circuit</h1>
+        <img src="{{asset("/uploads/" ~ grandprix.cover)}}" alt="">
+        <img src="{{asset("/uploads/" ~ grandprix.cover)}}" alt="">
+        {{form_start(myForm)}}
+            {{form_widget(myForm)}}
+            <button type="submit" class="btn btn-success float-right">Modifier les photos</button>
+        {{form_end(myForm)}}
+    </div>
+{% endblock %}

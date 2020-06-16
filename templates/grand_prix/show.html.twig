@@ -6,7 +6,7 @@
 
 <div class="slide_gp">
   <span class='spangp'>{{grandprix.title}}</span>
-  <img src="{{grandprix.cover}}" alt="">
+  <img src="{{asset("/uploads/" ~ grandprix.cover)}}" alt="">
 </div>
 <br>
 <br>
@@ -15,7 +15,7 @@
 
   <div class="row">
     <div class="col-12 col-md-6 mapcontent">
-      <img src="{{grandprix.map}}" alt="" class="map">
+      <img src="{{asset("/uploads/" ~ grandprix.map)}}" alt="" class="map">
     </div>  
 
     <div class="col-12 col-md-6">
@@ -49,35 +49,13 @@
 </div>  
   <br>
   <br>
-  <div class="container" style="padding-top:100px;">
-    <div class="row">
-      <div class="col-md-12 mb-3">
-
-        <div class="bd-example">
-          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              {% for image in grandprix.images %}
-              <li data-target="#carouselExampleCaptions" data-slide-to="{{ loop.index0 }}"
-                {% if loop.first %}class="active" {% endif %}></li>
-              {% endfor %}
-            </ol>
-            <div class="carousel-inner">
-
-              {% for image in grandprix.images %}
-              <div class="carousel-item {% if loop.first %}active{% endif %}">
-                <img src="{{ image.url }}" class="d-block w-100" alt="image de {{ grandprix.title }}">
-
-              </div>
-              {% endfor %}
-
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>   
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+ 
   <div class="container">
    <div class="descriptionpilote">
   <h3>Résumé</h3>

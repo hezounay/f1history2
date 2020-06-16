@@ -7,44 +7,49 @@
 <h1 style="text-align:center;">{{grandprix.title}}</h1>
 
 
+<div class="container" style="padding-top:100px;">
+            <h2>Classement final*</h2>
+            <hr>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Position</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Team</th>
+                    <th>Nationalité</th>
+                    <th>Temps</th>
+                    <th>Km/h</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-<div class="container">
-  <h2>Classement final</h2>
-  <hr>
-  <div class="table-responsive">          
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Position</th>
-        <th>Prénom</th>
-        <th>Nom</th>
-        <th>Team</th>
-        <th>Nationalité</th>
-        <th>Temps</th>
-      </tr>
-    </thead>
-    <tbody>
-        
-     {% for stats in myStats %}
-      <tr>
-  
-        <td>{{loop.index}}</td>
+                  {% for stats in myStats %}
+                  <tr>
 
-        <td><a href="{{path('admin_pilote_index')}}">{{stats.pilote.prenom}}</a></td>
-        <td><a href="{{path('admin_pilote_index')}}">{{stats.pilote.nom}}</a></td>
-        <td><a href="{{path('admin_team_index')}}">{{stats.pilote.team.nom}}</a></td>
+                    <td>{{loop.index}}</td>
 
-        <td>{{stats.pilote.nationalite}}</td>
-        <td>{{stats.chrono}}</td>
-     
-      
-      </tr>
-   
-      {% endfor %}
-    </tbody>
-  </table>
-  </div>
-</div>
+                    <td><a href="{{path('pilote_show', {'slug':stats.pilote.slug})}}"
+                        style='text-decoration:none;'>{{stats.pilote.prenom}}</a></td>
+                    <td><a href="{{path('pilote_show', {'slug':stats.pilote.slug})}}"
+                        style='text-decoration:none;'>{{stats.pilote.nom}}</a></td>
+                    <td><a href="{{path('team_show', {'slug':stats.team.slug})}}"
+                        style='text-decoration:none;'>{{stats.pilote.team.nom}}</a></td>
+
+                    <td>{{stats.pilote.nationalite}}</td>
+                    <td>{{stats.chrono}}</td>
+                    <td>{{stats.kmh}}</td>
+
+
+                  </tr>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <br>
+            <p>* Seuls les pilotes qui ont terminé sont affichés.</p>
 
 
 
