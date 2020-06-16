@@ -79,6 +79,11 @@ class GrandPrix
      */
     private $turns;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="grandPrix")
+     */
+    private $comments;
+
 
 
     public function __construct()
@@ -86,6 +91,7 @@ class GrandPrix
 
         $this->stats = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->comments = new ArrayCollection();
        
     }
     
@@ -285,6 +291,70 @@ class GrandPrix
         $this->turns = $turns;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setGrandPrix($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getGrandPrix() === $this) {
+                $comment->setGrandPrix(null);
+            }
+        }
+
+        return $this;
+    }
+      /**
+     * Permet de récupérer la note globale du Grand Prix
+     *
+     * @return float
+     */
+    public function getAvgRatings(){
+        // calculer la somme des notations
+        // la fonction php array_reduce permet de réduire le tableau à une seule valeur (attention il faut un tableau pas une array collection d'où le toArray() - 2ème paramètre pour la fonction pour chaque valeur - 3ème param valeur par défaut )
+        $sum = array_reduce($this->comments->toArray(), function($total, $comment){
+            return $total + $comment->getRating();
+        },0);
+
+        // faire la division pour avoir la moyenne
+
+        if(count($this->comments) > 0 ) return $moyenne = round($sum / count($this->comments));
+
+        return 0;
+
+    }
+
+    /**
+     * Permet de récupérer le commentaire d'un client par rapport à une chambre
+     *
+     * @param User $author
+     * @return Comment|null
+     */
+    public function getCommentFromAuthor(User $author){
+        foreach($this->comments as $comment){
+            if($comment->getAuthor() === $author) return $comment;
+        }
+
+        return null;
     }
 
    

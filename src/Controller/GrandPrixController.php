@@ -4,11 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Stats;
 use App\Entity\Pilote;
+use App\Entity\Comments;
 use App\Entity\GrandPrix;
+use App\Form\CommentType;
 use App\Repository\TeamRepository;
 use App\Repository\StatsRepository;
 use App\Repository\PiloteRepository;
+use App\Repository\CommentsRepository;
 use App\Repository\GrandPrixRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -108,14 +113,56 @@ class GrandPrixController extends AbstractController
      *
      * @return Response
      */
-    public function show($slug, GrandPrix $grandPrix, GrandPrixRepository $grandPrixRepo, StatsRepository $repo){
+    public function show($slug, GrandPrix $grandPrix, CommentsRepository $commentsRepository, GrandPrixRepository $grandPrixRepo,Request $request, EntityManagerInterface $manager,StatsRepository $repo){
 
         $stats = $repo->myOrderStats($slug, 'DESC');
+
+        $comments=new Comments();
+        $form=$this->createForm(CommentType::class,$comments);
+        $message="";
+        $formV=true;
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $comments->setAuthor($this->getUser())
+                ->setGrandPrix($grandPrix);
+            
+            $this->addFlash(
+                'success',
+                'Vous avez bien commenté ce Grand Prix'
+            );
+            
+            $manager->persist($comments);
+            $manager->flush();
+                
+            return $this->redirectToRoute('grandprix_show',[
+                'slug' => $grandPrix->getSlug()
+            ]);    
+        }
+
+        if($this->getUser()==null)
+        {
+            $message="Vous devez être connecté pour commenter un produit";
+            $formV=false;
+        }
+        else
+        {
+            $comments=$commentsRepository->findOneBy(["grandPrix"=>$grandPrix,"author"=>$this->getUser()]);
+            if($comments!=null)
+            {
+                $formV=false;
+                $message="Vous avez déjà commenté ce produit";
+            }
+        }
         
 
         return $this->render('grand_prix/show.html.twig', [
             'grandprix' => $grandPrix,
-            'myStats' => $stats
+            'myStats' => $stats,
+            "formV"=>$formV,
+            "myForm"=>$form->createView(),
+            "message"=>$message
            
             
           

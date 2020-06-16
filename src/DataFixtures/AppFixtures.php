@@ -2,15 +2,16 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
-use App\Entity\GrandPrix;
-use App\Entity\Image;
-use App\Entity\Pilote;
-use App\Entity\Stats;
 use App\Entity\Team;
 use App\Entity\User;
+use App\Entity\Image;
+use App\Entity\Stats;
+use App\Entity\Pilote;
+use App\Entity\Comments;
+use App\Entity\GrandPrix;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -38,6 +39,7 @@ class AppFixtures extends Fixture
 
 
         // gestion des Grands-Prix
+    
 
         for($i=1 ; $i <= 18; $i++){
             $gp = new GrandPrix();
@@ -50,6 +52,7 @@ class AppFixtures extends Fixture
             $map = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Circuit_Spa_2007.png/280px-Circuit_Spa_2007.png';
             $description ="<p>".join("</p><p>",$faker->paragraphs(3))."</p>";
             $covergp = $faker->imageUrl(1920,1080);
+            $comment = $faker->paragraph();
 
             $gp->setTitle($title." Grand-Prix")
                ->setDate($dategp)
@@ -59,6 +62,20 @@ class AppFixtures extends Fixture
                ->setLaps($laps)
                ->setKm($km)
                ->setTurns($turns);
+              
+
+                     // gestion des commentaires
+            if(mt_rand(0,1)){
+                $comment = new Comments();
+                $comment->setContent($faker->paragraph())
+                        ->setRating(mt_rand(1,5))
+                        ->setAuthor($adminUser)
+                        ->setGrandPrix($gp);
+                
+                $manager->persist($comment);        
+
+
+            }
               
                
         //gestion des images des Grands-Prix
