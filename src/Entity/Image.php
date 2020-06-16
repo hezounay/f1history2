@@ -17,7 +17,10 @@ class Image
      */
     private $id;
 
-  
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
