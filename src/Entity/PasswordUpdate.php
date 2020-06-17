@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PasswordUpdateRepository;
-
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class PasswordUpdate
