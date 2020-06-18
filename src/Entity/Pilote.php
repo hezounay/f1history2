@@ -1,16 +1,29 @@
 <?php
 
 namespace App\Entity;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PiloteRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Entity\Stats;
+
 
 /**
  * @ORM\Entity(repositoryClass=PiloteRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @ApiResource(
+ * normalizationContext={
+ * "groups"={"pilote_read"}
+ * })
+ * @ApiFilter(OrderFilter::class)
+ * @ApiFilter(SearchFilter::class)
  */
 class Pilote
 {
@@ -23,37 +36,51 @@ class Pilote
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"team_read","pilote_read","stats_read","grandprix_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"team_read","pilote_read","stats_read","grandprix_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"pilote_read"})
+     *
      */
     private $datenaissance;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pilote_read","stats_read","grandprix_read"})
+     *@Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $nationalite;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"pilote_read"})
+     *
      */
     private $actif;
 
     /**
      * @ORM\OneToMany(targetEntity=Stats::class, mappedBy="pilote", orphanRemoval=true)
+     * @Groups({"pilote_read"})
+     *
      */
     private $stats;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="pilotes")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"pilote_read","stats_read","grandprix_read"})
+     *
      */
     private $team;
 
@@ -64,21 +91,28 @@ class Pilote
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pilote_read","team_read"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"pilote_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $wins;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"pilote_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $poles;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"pilote_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $champion;
 

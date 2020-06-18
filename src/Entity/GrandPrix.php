@@ -5,19 +5,29 @@ namespace App\Entity;
 use App\Entity\Stats;
 use Cocur\Slugify\Slugify;
 
-
-
-use Symfony\Component\Validator\Constraints as Assert;
-
 use Doctrine\ORM\Mapping as ORM;
+
 use App\Repository\GrandPrixRepository;
+
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 
 /**
  * @ORM\Entity(repositoryClass=GrandPrixRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @ApiResource(
+ *  normalizationContext={
+ * "groups"={"grandprix_read"}
+ * })
+ * @ApiFilter(OrderFilter::class)
+ * @ApiFilter(SearchFilter::class)
  */
 class GrandPrix
 {
@@ -25,16 +35,20 @@ class GrandPrix
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grandprix_read","pilote_read","stats_read"})
+     * 
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"stats_read"})
      */
     private $date;
 
@@ -52,6 +66,8 @@ class GrandPrix
 
     /**
      * @ORM\OneToMany(targetEntity=Stats::class, mappedBy="grandPrix")
+     * @Groups({"grandprix_read"})
+     *
      */
     private $stats;
 

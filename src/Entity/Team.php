@@ -3,15 +3,27 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
-use ApiPlatform\Core\Annotation\ApiResource;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TeamRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @ApiResource(
+ *  normalizationContext={
+ * "groups"={"team_read"}
+ * })
+ * @ApiFilter(OrderFilter::class)
+ * @ApiFilter(SearchFilter::class)
  */
 class Team
 {
@@ -24,21 +36,29 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pilote_read","stats_read","grandprix_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner le nom de l'Ecurie")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pilote_read","stats_read","team_read"})
+     * @Assert\NotBlank(message="Vous devez renseigner le moteur de l'Ecurie")
      */
     private $moteur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"team_read"})
+     * 
      */
     private $pays;
 
     /**
      * @ORM\OneToMany(targetEntity=Pilote::class, mappedBy="team")
+     * @Groups({"team_read"})
+     *
      */
     private $pilotes;
 
@@ -49,31 +69,37 @@ class Team
 
     /**
      * @ORM\OneToMany(targetEntity=Stats::class, mappedBy="team", orphanRemoval=true)
+     * 
      */
     private $stats;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"team_read"})
      */
     private $cover;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"team_read"})
      */
     private $champion;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"team_read"})
      */
     private $poles;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"team_read"})
      */
     private $championpilote;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"team_read"})
      */
     private $wins;
 

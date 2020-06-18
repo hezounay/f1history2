@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 
@@ -14,6 +19,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=GrandPrixRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @ApiResource
+ * @ApiFilter(OrderFilter::class)
+ * @ApiFilter(SearchFilter::class)
  */
 class GrandPrixPhotoEdit
 {

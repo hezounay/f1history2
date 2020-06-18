@@ -2,16 +2,32 @@
 
 namespace App\Entity;
 
+use App\Entity\Team;
+use App\Entity\Pilote;
+use App\Entity\GrandPrix;
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StatsRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=StatsRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @ApiResource(
+ * normalizationContext={
+ * "groups"={"stats_read"}
+ * })
+ * @ApiFilter(OrderFilter::class)
+ * @ApiFilter(SearchFilter::class)
  */
 class Stats
 {
@@ -25,12 +41,16 @@ class Stats
     /**
      * @ORM\ManyToOne(targetEntity=Pilote::class, inversedBy="stats")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"stats_read","grandprix_read"})
+     * 
      */
     private $pilote;
 
     /**
      * @ORM\ManyToOne(targetEntity=GrandPrix::class, inversedBy="stats")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"pilote_read"})
+     * 
      */
     private $grandPrix;
 
@@ -44,22 +64,30 @@ class Stats
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="stats")
      * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $team;
 
     /**
      * @ORM\ManyToOne(targetEntity=GrandPrix::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"stats_read"})
+     * 
+     *
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"stats_read","pilote_read","grandprix_read"})
+     *
      */
     private $chrono;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"stats_read","pilote_read","grandprix_read"})
+     * 
      */
     private $kmh;
 

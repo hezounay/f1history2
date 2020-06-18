@@ -3,17 +3,27 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(OrderFilter::class)
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ApiResource(
+ *  normalizationContext={
+ * "groups"={"user_read"}
+ * }))
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
  * fields={"email"},
@@ -32,6 +42,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="Veuillez renseigner une adresse email valide")
+     * @Groups({"user_read"})
      */
     private $email;
 
@@ -44,6 +55,7 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min=8, minMessage="Votre mot de passe doit faire au moins 8 caractères")
+     * @Groups({"user_read"})
      */
     private $password;
 
@@ -51,12 +63,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
+     * @Groups({"user_read"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Vous devez renseigner votre nom de famille")
+     * @Groups({"user_read"})
      */
     private $lastName;
 

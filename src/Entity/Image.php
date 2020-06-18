@@ -1,13 +1,19 @@
 <?php
 
 namespace App\Entity;
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ImageRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
+ * @ApiResource
  */
 class Image
 {
@@ -15,6 +21,8 @@ class Image
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ApiFilter(OrderFilter::class)
+     * @ApiFilter(SearchFilter::class)
      */
     private $id;
 

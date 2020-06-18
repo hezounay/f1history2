@@ -156,23 +156,13 @@ class AdminGrandPrixController extends AbstractController
      */
     public function editPhoto(GrandPrix $grandprix, Request $request, EntityManagerInterface $manager)
     {
-        $grandprix = new GrandPrixPhotoEdit();
-        $form = $this->createForm(GrandPrixPhotoEditType::class,$grandprix);
+        $grandprix2 = new GrandPrixPhotoEdit();
+        $form = $this->createForm(GrandPrixPhotoEditType::class,$grandprix2);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){   
-            if(!empty($grandprix->getCover())){
-              
-                    unlink($this->getParameter('uploads_directory').'/'.$grandprix);
-            
-                   }
-                if(!empty($grandprix->getMap())){
-                   
-                        unlink($this->getParameter('uploads_directory').'/'.$grandprix);
-                
-                
-            }
+         
             $file = $form['cover']->getData();
             $file2 = $form['map']->getData();
            
@@ -190,7 +180,10 @@ class AdminGrandPrixController extends AbstractController
                     return $e->getMessage();
                 }
                 $grandprix->setCover($newFilename);
-                unlink($this->getParameter("uploads_directory")."/".$cover);
+                if(!empty($cover)){
+
+                    unlink($this->getParameter("uploads_directory")."/".$cover);
+                }
   
             }
             if(!empty($file2)){
@@ -207,7 +200,9 @@ class AdminGrandPrixController extends AbstractController
                     return $e->getMessage();
                 }
                 $grandprix->setMap($newFilename);
+                if(!empty($map)){
                 unlink($this->getParameter("uploads_directory")."/".$map);
+            }
             }
 
             $manager->persist($grandprix);

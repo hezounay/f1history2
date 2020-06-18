@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 var Encore = require('@symfony/webpack-encore');
 const CopyPlugin = require('copy-webpack-plugin')
 
@@ -35,7 +37,7 @@ Encore
             patterns: [ 
                 { from: "./assets/fonts", to: "fonts"}
                 
-            ]
+            ]   
         }
     ))
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -82,4 +84,9 @@ Encore
     //.addEntry('admin', './assets/js/admin.js')
 ;
 
+
+Encore.configureDefinePlugin(options => {
+    options["process.env"].API_URL = process.env.API_URL
+   });
+   
 module.exports = Encore.getWebpackConfig();

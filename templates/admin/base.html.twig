@@ -16,7 +16,8 @@
         {% block body %}{% endblock %}
 
         {% include 'admin/partials/footer.html.twig' %}
+       
 
       {{ encore_entry_script_tags('app') }}
-      
+       {% block javascripts %}{% endblock %}
 </html>
