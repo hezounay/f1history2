@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Pilote;
 use App\Entity\Team;
+use App\Entity\Pilote;
 use App\Form\PiloteType;
+use App\Entity\PilotePhotoEdit;
+use App\Form\PilotePhotoEditType;
 use App\Service\PaginationService;
 use App\Repository\PiloteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminPiloteController extends AbstractController
 {
@@ -114,7 +117,22 @@ class AdminPiloteController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-
+            $file = $form['picture']->getData();
+        
+            if(!empty($file)){
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try{
+                   $file->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $pilote->setPicture($newFilename);
+            }
      
 
             $manager->persist($pilote);
@@ -136,6 +154,61 @@ class AdminPiloteController extends AbstractController
 
     }
 
+     /**
+     * Permet d'afficher le formulaire d'édition de la photo
+     * @Route("/admin/pilote/{id}/edit/photo", name="admin_pilote_edit_photo")
+     * @param Pilote $pilote
+     */
+    public function editPhoto(Pilote $pilote, Request $request, EntityManagerInterface $manager)
+    {
+        $pilote2 = new PilotePhotoEdit();
+        $form = $this->createForm(PilotePhotoEditType::class,$pilote2);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){   
+         
+            $file = $form['picture']->getData();
+          
+           
+            if(!empty($file)){
+                $picture=$pilote->getPicture();
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try{
+                   $file->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $pilote->setPicture($newFilename);
+                if(!empty($picture)){
+
+                    unlink($this->getParameter("uploads_directory")."/".$picture);
+                }
+  
+            }
+           
+
+            $manager->persist($pilote);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le Pilote a bien été modifié"
+            );
+            return $this->redirectToRoute("admin_pilote_index");
+        }
+
+        return $this->render('admin/pilote/editPhoto.html.twig',[
+            'pilote' => $pilote,
+            'myForm' => $form->createView()
+        ]);
+        
+    }
 
 
 

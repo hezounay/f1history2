@@ -6,6 +6,8 @@ use App\Entity\Team;
 
 use App\Form\TeamType;
 use App\Form\PiloteType;
+use App\Entity\TeamPhotoEdit;
+use App\Form\TeamPhotoEditType;
 use App\Service\PaginationService;
 use App\Repository\PiloteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminTeamController extends AbstractController
 {
@@ -118,7 +121,22 @@ class AdminTeamController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
 
-     
+            $file = $form['cover']->getData();
+        
+            if(!empty($file)){
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try{
+                   $file->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $team->setCover($newFilename);
+            }
 
             $manager->persist($team);
             $manager->flush();
@@ -137,6 +155,63 @@ class AdminTeamController extends AbstractController
            'myForm' => $form->createView()
         ]);
 
+    }
+
+
+     /**
+     * Permet d'afficher le formulaire d'édition de la photo
+     * @Route("/admin/team/{id}/edit/photo", name="admin_team_edit_photo")
+     * @param Team $team
+     */
+    public function editPhoto(Team $team, Request $request, EntityManagerInterface $manager)
+    {
+        $team2 = new TeamPhotoEdit();
+        $form = $this->createForm(TeamPhotoEditType::class,$team2);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){   
+         
+            $file = $form['cover']->getData();
+          
+           
+            if(!empty($file)){
+                $cover=$team->getCover();
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try{
+                   $file->move(
+                       $this->getParameter('uploads_directory'),
+                       $newFilename
+                   ); 
+                }catch(FileException $e){
+                    return $e->getMessage();
+                }
+                $team->setCover($newFilename);
+                if(!empty($cover)){
+
+                    unlink($this->getParameter("uploads_directory")."/".$cover);
+                }
+  
+            }
+           
+
+            $manager->persist($team);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "L'écurie a bien été modifié"
+            );
+            return $this->redirectToRoute("admin_team_index");
+        }
+
+        return $this->render('admin/team/editPhoto.html.twig',[
+            'team' => $team,
+            'myForm' => $form->createView()
+        ]);
+        
     }
     
 }

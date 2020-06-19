@@ -39,6 +39,7 @@
                         <td>{{pilote.datenaissance | date("m/d/Y")}}</td>
                         <td>{{pilote.actif}}</td>
                         <td class="text-center">
+                          <a href="{{ path('admin_pilote_edit_photo', {'id':pilote.id}) }}" class="btn btn-primary"> <i class=" fas fa-image"></i></a>
                             <a href="{{ path('admin_pilote_edit', {'id':pilote.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                             <a href="{{ path('admin_pilote_delete', {'id':pilote.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                         </td>

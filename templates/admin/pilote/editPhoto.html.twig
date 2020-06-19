@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Modifier photo{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Modifier la photo de couverture et la carte du pilote {{pilote.nom}}</h1>
+        <div class="container">
+        <div class="row">
+        <div class="col-4">
+         <img src="{{asset("/uploads/" ~ pilote.picture)}}" alt=""class="img-fluid">
+         </div>
+          
+        </div>
+      </div>
+       
+        {{form_start(myForm)}}
+            {{form_widget(myForm)}}
+            <button type="submit" class="btn btn-success float-right">Modifier les photos</button>
+        {{form_end(myForm)}}
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+$('.custom-file input').change(function (e) {
+  var files = [];
+  for (var i = 0; i < $(this)[0].files.length; i++) {
+      files.push($(this)[0].files[i].name);
+  }
+  $(this).next('.custom-file-label').html(files.join(', '));
+});</script>
+{% endblock %}
