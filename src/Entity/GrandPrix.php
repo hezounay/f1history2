@@ -48,7 +48,7 @@ class GrandPrix
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"stats_read"})
+     * @Groups({"stats_read", "grandprix_read"})
      */
     private $date;
 
@@ -85,26 +85,31 @@ class GrandPrix
      * @ORM\Column(type="string", length=255)
      * @Assert\Image(mimeTypes={"image/png","image/jpeg","image/gif"}, mimeTypesMessage="Vous devez upload un fichier jpg, png ou gif", groups={"front"})
      * @Assert\File(maxSize="1024k", maxSizeMessage="taille du fichier trop grande", groups={"front"})
+     * @Groups({"grandprix_read"})
      */
     private $cover;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grandprix_read"})
      */
     private $km;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grandprix_read"})
      */
     private $laps;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"grandprix_read"})
      */
     private $turns;
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="grandPrix")
+     * @Groups({"grandprix_read"})
      */
     private $comments;
 
