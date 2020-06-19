@@ -44,7 +44,7 @@ class TeamType extends AbstractType
             ->add('pays', CountryType::class, [
                 'label' => 'Nationalité',
               ])
-              ->add('cover', UrlType::class, [
+              ->add('cover', FileType::class, [
                 'label' => 'Photo de couverture de la team',
                 'attr' => [
                     'placeholder'=>"ajoutez l'URL de la photo de couverture de la team"
