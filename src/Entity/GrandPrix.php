@@ -35,7 +35,7 @@ class GrandPrix
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * 
+     * @Groups({"grandprix_read"})
      */
     private $id;
 
