@@ -75,7 +75,7 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team_read"})
+     * @Groups({"team_read", "pilote_read"})
      */
     private $cover;
 
