@@ -31,6 +31,7 @@ class Team
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"team_read"})
      */
     private $id;
 
