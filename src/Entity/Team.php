@@ -36,7 +36,7 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"pilote_read","stats_read","grandprix_read"})
+     * @Groups({"pilote_read","stats_read","grandprix_read","team_read"})
      * @Assert\NotBlank(message="Vous devez renseigner le nom de l'Ecurie")
      */
     private $nom;
