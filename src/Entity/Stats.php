@@ -64,7 +64,7 @@ class Stats
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="stats")
      * @ORM\JoinColumn(nullable=false)
-     *
+     * @Groups({"stats_read"})
      */
     private $team;
 
