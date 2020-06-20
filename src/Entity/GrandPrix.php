@@ -62,6 +62,7 @@ class GrandPrix
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"grandprix_read"})
      */
     private $description;
 
