@@ -77,6 +77,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="author", orphanRemoval=true)
+     * @Groups({"user_read"})
      *
      */
     private $comments;

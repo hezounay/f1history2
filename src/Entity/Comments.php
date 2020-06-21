@@ -34,19 +34,19 @@ class Comments
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"grandprix_read","comments_read"})
+     * @Groups({"grandprix_read","comments_read","user_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"grandprix_read","comments_read"})
+     * @Groups({"grandprix_read","comments_read","user_read"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"grandprix_read","comments_read"})
+     * @Groups({"grandprix_read","comments_read","user_read"})
      */
     private $content;
 
