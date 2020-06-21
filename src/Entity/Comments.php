@@ -16,7 +16,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CommentsRepository::class)
  * @ORM\HasLifecycleCallbacks()
- * @ApiResource
+ * @ApiResource(
+ *  normalizationContext={
+ * "groups"={"comments_read"}
+ * }))
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(SearchFilter::class)
  */
