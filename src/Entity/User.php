@@ -43,7 +43,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="Veuillez renseigner une adresse email valide")
-     * @Groups({"user_read","grandprix_read"})
+     * @Groups({"user_read"})
      */
     private $email;
 
@@ -77,7 +77,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="author", orphanRemoval=true)
-     * @Groups({"user_read","grandprix_read"})
+     *
      */
     private $comments;
 
