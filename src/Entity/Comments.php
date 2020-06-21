@@ -31,16 +31,19 @@ class Comments
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"grandprix_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"grandprix_read"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"grandprix_read"})
      */
     private $content;
 
@@ -53,6 +56,7 @@ class Comments
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"grandprix_read"})
      */
     private $author;
 

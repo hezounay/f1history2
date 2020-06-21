@@ -36,13 +36,14 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"grandprix_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="Veuillez renseigner une adresse email valide")
-     * @Groups({"user_read"})
+     * @Groups({"user_read","grandprix_read"})
      */
     private $email;
 
@@ -63,19 +64,20 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
-     * @Groups({"user_read"})
+     * @Groups({"user_read","grandprix_read"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Vous devez renseigner votre nom de famille")
-     * @Groups({"user_read"})
+     * @Groups({"user_read","grandprix_read"})
      */
     private $lastName;
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="author", orphanRemoval=true)
+     * @Groups({"user_read","grandprix_read"})
      */
     private $comments;
 
