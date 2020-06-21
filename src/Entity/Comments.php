@@ -56,7 +56,7 @@ class Comments
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"grandprix_read"})
+     * @Groups({"grandprix_read","comments_read"})
      */
     private $author;
 
