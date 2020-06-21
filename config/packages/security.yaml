@@ -68,4 +68,5 @@ security:
         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/api/comments, roles: IS_AUTHENTICATED_FULLY, methods: [POST]}
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}
        
