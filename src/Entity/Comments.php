@@ -34,25 +34,26 @@ class Comments
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"grandprix_read"})
+     * @Groups({"grandprix_read","comments_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"grandprix_read"})
+     * @Groups({"grandprix_read","comments_read"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"grandprix_read"})
+     * @Groups({"grandprix_read","comments_read"})
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=GrandPrix::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"user_read","comments_read"})
      */
     private $grandPrix;
 
