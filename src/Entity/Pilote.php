@@ -31,7 +31,7 @@ class Pilote
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"pilote_read", "stats_read"})
+     * @Groups({"pilote_read", "stats_read","grandprix_read"})
      */
     private $id;
 
