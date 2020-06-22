@@ -15,6 +15,7 @@ class JwtCreatedSubscriber {
 
         $data['firstName'] = $user->getFirstName();
         $data['lastName'] = $user->getLastName();
+        $data['id'] = $user->getId();
 
         $event->setData($data); // on repasse le tableau data une fois qu'il est modifié
 
