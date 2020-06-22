@@ -111,7 +111,7 @@ class GrandPrix
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="grandPrix")
-     * @Groups({"grandprix_read","user_read"})
+     * @Groups({"grandprix_read"})
      */
     private $comments;
 

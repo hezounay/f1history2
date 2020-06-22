@@ -36,7 +36,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"grandprix_read","comments_read"})
+     * @Groups({"grandprix_read","comments_read", "user_read"})
      */
     private $id;
 
@@ -56,7 +56,7 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min=8, minMessage="Votre mot de passe doit faire au moins 8 caractères")
-     * @Groups({"user_read"})
+     * 
      */
     private $password;
 
