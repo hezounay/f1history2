@@ -14,13 +14,7 @@ class CommentType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating', IntegerType::class, $this->getConfiguration("Note sur 5","Veuillez indiquer votre note de 0 à 5",[
-                'attr' => [
-                    'min' => 0,
-                    'max' => 5,
-                    'step' => 1
-                ]
-            ]))
+         
             ->add('content', TextareaType::class, $this->getConfiguration("Votre avis sur la course", "N'hésitez pas à être très précis dans votre commentaire!"))
         ;
     }

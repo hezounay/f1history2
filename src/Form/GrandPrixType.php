@@ -51,15 +51,7 @@ class GrandPrixType extends AbstractType
            
             ])
 
-            ->add(
-                'images',
-                CollectionType::class,
-                [
-                    'entry_type' => ImageType::class,
-                    'allow_add' => true, // permet d'ajouter de nouveaux éléments et ajouter un data_prototype (HTML)
-                    'allow_delete' => true // permet de supprimer des éléments
-                ]
-                )
+            
                 ->add('laps', TextType::class, [
                     'label' => 'Tours',
                     'attr' => [

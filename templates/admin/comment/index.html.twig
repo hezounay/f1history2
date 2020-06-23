@@ -13,7 +13,7 @@
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Commentaire</th>
-                    <th>Note</th>
+                  
                     <th>Grand Prix</th>
                     <th>Action</th>
                 </tr>
@@ -26,9 +26,7 @@
                         <td>{{comment.author.firstName}}</td>
                         <td>{{comment.author.lastName}}</td>
                         <td>{{comment.content}}</td>
-                        <td>
-                            <span class="badge badge-dark">{{comment.rating}}</span>
-                        </td>
+                     
                         <td>{{comment.grandprix.title}}</td>
                         <td>
                             <a href="{{ path('admin_comment_edit', {id:comment.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
