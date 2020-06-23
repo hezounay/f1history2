@@ -27,6 +27,9 @@ class StatsService{
     public function getTeamCount(){
         return $this->manager->createQuery('SELECT COUNT(c) FROM App\Entity\Team c')->getSingleScalarResult();
     }
+    public function getCommentCount(){
+        return $this->manager->createQuery('SELECT COUNT(c) FROM App\Entity\Comments c')->getSingleScalarResult();
+    }
 
     public function getAdsStats($direction){
         return $this->manager->createQuery(

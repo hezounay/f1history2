@@ -31,11 +31,12 @@ class AdminDashboardController extends AbstractController
         $gp = $statsService->getGrandPrixCount();
         $driver = $statsService->getPiloteCount();
         $team = $statsService->getTeamCount();
+        $comment = $statsService->getCommentCount();
 
 
 
         return $this->render('admin/dashboard/index.html.twig', [
-            'stats' => compact('stats','gp','driver','team')
+            'stats' => compact('stats','gp','driver','team','comment')
         ]);
     }
   
