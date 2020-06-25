@@ -27,7 +27,7 @@
                 {% for grandprix in pagination.data %}
                     <tr>
                         <td>{{grandprix.id}}</td>
-                        <td><a href="{{ path('admin_grandprix_show', {'slug':grandprix.slug}) }}" style="text-decoration:none;">{{grandprix.title}}</a></td>
+                        <td>{{grandprix.title}}</td>
                         <td>{{grandprix.date}}</td>
                         <td>{{grandprix.laps}}</td>
                         <td>{{grandprix.km}}</td>
@@ -43,7 +43,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        {{ pagination.display() }}
+     
     </div>
 {% endblock %}
 

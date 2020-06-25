@@ -23,7 +23,7 @@ class AdminStatsController extends AbstractController
      
         $pagination->setEntityClass(Stats::class)
         ->setPage($page)
-        ->setLimit(10)
+        ->setLimit(500)
         ->setRoute('admin_stats_index');
 
         /* return $this->render('admin/stats/index.html.twig', [

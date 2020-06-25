@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Team;
 use App\Entity\Pilote;
 use App\Form\PiloteType;
+use App\Form\PiloteEditType;
 use App\Entity\PilotePhotoEdit;
 use App\Form\PilotePhotoEditType;
 use App\Service\PaginationService;
@@ -29,7 +30,7 @@ class AdminPiloteController extends AbstractController
      
         $pagination->setEntityClass(Pilote::class)
         ->setPage($page)
-        ->setLimit(10)
+        ->setLimit(500)
         ->setRoute('admin_pilote_index');
 
    
@@ -57,7 +58,7 @@ class AdminPiloteController extends AbstractController
      * @return Response
      */
     public function edit(Pilote $pilote, Request $request, EntityManagerInterface $manager){
-        $form = $this->createForm(PiloteType::class,$pilote);
+        $form = $this->createForm(PiloteEditType::class,$pilote);
 
         $form->handleRequest($request);
 

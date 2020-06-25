@@ -6,6 +6,7 @@ use App\Entity\Team;
 
 use App\Form\TeamType;
 use App\Form\PiloteType;
+use App\Form\TeamEditType;
 use App\Entity\TeamPhotoEdit;
 use App\Form\TeamPhotoEditType;
 use App\Service\PaginationService;
@@ -30,7 +31,7 @@ class AdminTeamController extends AbstractController
      
         $pagination->setEntityClass(Team::class)
         ->setPage($page)
-        ->setLimit(10)
+        ->setLimit(500)
         ->setRoute('admin_team_index');
 
    
@@ -58,7 +59,7 @@ class AdminTeamController extends AbstractController
      * @return Response
      */
     public function edit(Team $team, Request $request, EntityManagerInterface $manager){
-        $form = $this->createForm(TeamType::class,$team);
+        $form = $this->createForm(TeamEditType::class,$team);
 
         $form->handleRequest($request);
 

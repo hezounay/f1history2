@@ -32,7 +32,7 @@ class AdminGrandPrixController extends AbstractController
      
         $pagination->setEntityClass(GrandPrix::class)
         ->setPage($page)
-        ->setLimit(10)
+        ->setLimit(500)
         ->setRoute('admin_grandprix_index');
 
         /* return $this->render('admin/grand_prix/index.html.twig', [

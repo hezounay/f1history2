@@ -136,7 +136,7 @@ class Pilote
     public function initializeSlug(){
         if(empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->nom.' '.$this->prenom.' '.$this->team);
+            $this->slug = $slugify->slugify($this->nom.' '.$this->prenom);
         }
 
     }
