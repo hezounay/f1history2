@@ -13,12 +13,11 @@ class JwtCreatedSubscriber {
 
         $data = $event->getData(); // récupère un tableau qui conteint les données de base sur l'utilisateur dans le JWT
 
-        $data['firstName'] = $user->getFirstName();
-        $data['lastName'] = $user->getLastName();
+
         $data['id'] = $user->getId();
 
         $event->setData($data); // on repasse le tableau data une fois qu'il est modifié
 
     }
 
-}
+}   
